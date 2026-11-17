@@ -1,816 +1,881 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Keya's Portfolio</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{if(localStorage.getItem("theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<title>Keya Shah</title>
+<meta name="description" content="Keya Shah designs and builds accessible technology: assistive tech at Key2Enable, HCI research, and an MSc in Disability, Design and Innovation at UCL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bevan&family=Jost:wght@500&family=Poppins&family=Raleway:wght@500&display=swap" rel="stylesheet">
-
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap" rel="stylesheet">
 <style>
+/* ===== Palette: brick, gold, green, cobalt + neutrals ===== */
+:root{
+  --brick:#A30000; --gold:#EACE00; --green:#1E5500; --cobalt:#002C78;
+  --bg:#FFFAF1; --card:#FFFFFF; --ink:#1A1A1A; --muted:#5C5A55; --line:#ECE6DA;
+  --r-sm:16px; --r:26px; --r-lg:36px;
+  --soft-shadow:0 1px 2px rgba(60,40,0,.04),0 18px 40px -22px rgba(60,40,0,.22);
+  --lift-shadow:0 2px 6px rgba(60,40,0,.05),0 40px 80px -36px rgba(60,40,0,.45);
+  --dark:#18181A; --dark-text:#FFFAF1; --dark-dim:#8F8C86; --dark-card:#222225;
+  --focus:#003185; --accent:var(--cobalt); --cream:#F3E4C4;
+  --max:1320px; --pad:clamp(18px,4vw,56px);
+  --font:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --ease-io:cubic-bezier(.65,0,.35,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+}
+html{color-scheme:light}
+[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#141416; --card:#1F1F23; --ink:#F5F0E6; --muted:#B3AEA5; --line:#303036;
+  --dark:#232327; --dark-text:#F5F0E6; --dark-card:#2A2A2E; --focus:#F5D800; --accent:var(--gold);
+  --soft-shadow:0 1px 2px rgba(0,0,0,.35),0 18px 40px -22px rgba(0,0,0,.8);
+  --lift-shadow:0 2px 6px rgba(0,0,0,.35),0 40px 80px -36px rgba(0,0,0,.95);
+}
+[data-theme="dark"] .tile .img{background:#2A2A2E}
+[data-theme="dark"] .nav{box-shadow:0 0 0 1px var(--line),var(--soft-shadow)}
+[data-theme="dark"] .cbar{box-shadow:0 0 0 1px var(--line)}*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:90px}
+html,body{overflow-x:clip}
+html.locked{overflow:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:18px;line-height:1.6;letter-spacing:-.006em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;transition:background .5s var(--ease),color .5s var(--ease)}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
+h1,h2,h3{margin:0;font-weight:400;line-height:1;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+::selection{background:var(--gold);color:#111}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:fixed;left:16px;top:-60px;z-index:200;background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:500;transition:top .3s var(--ease)}
+.skip:focus{top:16px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.tag{display:inline-block;font-size:15px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.tag::before{content:"( "}.tag::after{content:" )"}
+.up{text-transform:uppercase}
+
+/* ===== Scroll progress ===== */
+.progress{position:fixed;inset:0 0 auto;height:3px;z-index:70;pointer-events:none}
+.progress i{display:block;height:100%;background:var(--accent);transform-origin:0 50%;transform:scaleX(var(--p,0))}
+
+/* ===== Floating nav ===== */
+.nav{position:fixed;left:50%;top:18px;z-index:60;transform:translate(-50%,0);width:min(1000px,calc(100% - 24px));display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 8px 8px 26px;background:var(--card);border-radius:999px;box-shadow:var(--soft-shadow);transition:transform .6s var(--ease),background .4s,box-shadow .4s;animation:navIn 1s var(--ease) .15s backwards}
+@supports (backdrop-filter:blur(1px)){
+  .nav.scrolled{background:color-mix(in srgb,var(--card) 78%,transparent);backdrop-filter:blur(18px) saturate(1.6);-webkit-backdrop-filter:blur(18px) saturate(1.6)}
+}
+.nav.hide{transform:translate(-50%,calc(-100% - 30px))}
+@keyframes navIn{from{opacity:0;transform:translate(-50%,-24px)}to{opacity:1;transform:translate(-50%,0)}}
+.logo{font-weight:600;font-size:25px;line-height:1;letter-spacing:-.05em;text-decoration:none;display:flex;align-items:baseline;gap:1px}
+.logo i{font-style:normal;color:var(--brick);display:inline-block;transition:transform .6s var(--spring)}
+.logo:hover i{transform:translateY(-6px) scale(1.25)}
+[data-theme="dark"] .logo i{color:#E0534F}
+.nav nav{position:relative}
+.links{display:flex;gap:2px;list-style:none;margin:0;padding:0}
+.links a{position:relative;z-index:1;display:block;padding:9px 15px;font-size:15.5px;font-weight:500;text-decoration:none;border-radius:999px;color:var(--muted);transition:color .3s}
+.links a:hover,.links a[aria-current="true"]{color:var(--ink)}
+.ind{position:absolute;left:0;top:0;height:0;width:0;border-radius:999px;background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);opacity:0;pointer-events:none;z-index:0}
+.ind.ready{transition:transform .55s var(--ease),width .55s var(--ease),height .55s var(--ease),opacity .3s}
+.nav-r{display:flex;align-items:center;gap:8px}
+.theme{width:44px;height:44px;border-radius:50%;border:0;background:none;cursor:pointer;display:grid;place-items:center;transition:background .3s,transform .3s var(--ease)}
+@media (hover:hover){.theme:hover{background:var(--bg)}}
+.theme:active{transform:scale(.9)}
+.theme svg{grid-area:1/1;transition:opacity .35s var(--ease),rotate .6s var(--spring),scale .6s var(--spring)}
+.theme .sun{opacity:0;rotate:-90deg;scale:.4}
+[data-theme="dark"] .theme .moon{opacity:0;rotate:90deg;scale:.4}
+[data-theme="dark"] .theme .sun{opacity:1;rotate:0deg;scale:1}
+
+/* Buttons: fill wipes up from below */
+.btn{--fill:var(--accent);--fill-ink:#fff;position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 24px;border-radius:999px;border:1.5px solid var(--ink);background:var(--ink);color:var(--bg);font-size:16px;font-weight:500;letter-spacing:-.01em;text-decoration:none;cursor:pointer;transition:color .4s var(--ease),border-color .4s var(--ease),scale .2s var(--ease),translate .6s var(--ease)}
+.btn::before{content:"";position:absolute;inset:-1px;z-index:-1;background:var(--fill);border-radius:inherit;transform:translateY(102%);transition:transform .5s var(--ease)}
+@media (hover:hover){.btn:hover{color:var(--fill-ink);border-color:var(--fill)}}
+@media (hover:hover){.btn:hover::before{transform:none}}
+.btn:active{scale:.97}
+.btn .arr{display:inline-block;transition:transform .45s var(--ease)}
+@media (hover:hover){.btn:hover .arr{transform:translate(2px,-2px)}}
+.btn.ghost{background:transparent;color:var(--ink);--fill:var(--ink);--fill-ink:var(--bg)}
+@media (hover:hover){.btn.ghost:hover{border-color:var(--ink)}}
+[data-theme="dark"] .btn{--fill-ink:#111}
+.menu-btn{display:none;align-items:center;gap:10px;height:44px;padding:0 16px 0 14px;border:1.5px solid var(--line);border-radius:999px;background:var(--card);font-size:16px;font-weight:500;cursor:pointer;transition:border-color .3s,scale .2s var(--ease)}
+.menu-btn:active{scale:.96}
+.menu-btn[aria-expanded="true"]{border-color:var(--ink)}
+.mb-ic{position:relative;width:16px;height:10px}
+.mb-ic i{position:absolute;left:0;right:0;height:1.8px;border-radius:2px;background:currentColor;transition:transform .45s var(--ease),top .45s var(--ease)}
+.mb-ic i:first-child{top:0}.mb-ic i:last-child{top:8px}
+[aria-expanded="true"] .mb-ic i:first-child{top:4px;transform:rotate(45deg)}
+[aria-expanded="true"] .mb-ic i:last-child{top:4px;transform:rotate(-45deg)}
+
+/* ===== Hero ===== */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:130px 0 120px;overflow:hidden}
+.hero .wrap{will-change:transform,opacity}
+.hero h1{text-align:center;font-size:clamp(44px,7.4vw,124px);font-weight:500;letter-spacing:-.045em;line-height:.98}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero h1 .ln{display:block;overflow:hidden;padding:0 .06em .1em;margin-bottom:-.1em}
+.hero h1 .ln>span{display:block;transform:translateY(110%) rotate(2deg);transform-origin:0 100%;animation:lnUp 1.25s var(--ease) both;animation-delay:calc(var(--i,0) * 110ms + 250ms)}
+@keyframes lnUp{to{transform:none}}
+.hero-sub{margin:clamp(20px,2.4vw,32px) auto 0;text-align:center;white-space:nowrap;font-size:clamp(17px,1.6vw,22px);line-height:1.45;color:var(--muted);animation:fadeUp 1.1s var(--ease) .6s both}
+.hero-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-top:clamp(36px,6vw,72px);animation:fadeUp 1.1s var(--ease) .75s both}
+.hero-foot>:only-child{margin-inline:auto}
+.hero-foot p{max-width:38ch;color:var(--muted);font-size:17px}
+.hero-foot p b{color:var(--ink);font-weight:500}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.scroll-cue{position:absolute;left:50%;bottom:28px;translate:-50% 0;width:26px;height:42px;border:1.5px solid var(--line);border-radius:999px;animation:fadeUp 1s var(--ease) 1.3s both}
+.scroll-cue::after{content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--muted);animation:cue 2s var(--ease-io) 2s infinite}
+@keyframes cue{0%{opacity:0;transform:translateY(-3px)}30%{opacity:1}80%,100%{opacity:0;transform:translateY(14px)}}
+
+/* ===== Dark sections with arc ===== */
+.dark{position:relative;border-radius:0 0 var(--r-lg) var(--r-lg);background:var(--dark);color:var(--dark-text);padding:clamp(120px,14vw,200px) 0 clamp(80px,10vw,140px);margin-top:-1px;transition:background .5s var(--ease)}
+.dark{--k:0}
+.dark::before{content:"";position:absolute;left:calc(-10% + var(--k) * 10%);right:calc(-10% + var(--k) * 10%);top:calc(-90px - (1 - var(--k)) * 70px);height:calc(180px + (1 - var(--k)) * 140px);background:inherit;border-radius:50% 50% 0 0 / calc(100% - var(--k) * 70%) calc(100% - var(--k) * 70%) 0 0}
+#about{transform:translateY(calc((1 - var(--k)) * 60px));transition:none}
+.dark>*{position:relative;z-index:1}
+#about{border-radius:0}
+#about::after{content:"";position:absolute;left:0;right:0;bottom:-90px;height:180px;background:inherit;border-radius:0 0 50% 50% / 0 0 30% 30%;pointer-events:none}
+#about + .sec{padding-top:calc(clamp(80px,10vw,140px) + 60px)}
+.center{text-align:center}
+.about-text{max-width:1180px;margin:28px auto 0;font-size:clamp(26px,3.6vw,56px);font-weight:400;line-height:1.16;letter-spacing:-.03em;text-align:center}
+.about-text .w{color:var(--dark-dim);transition:color .6s var(--ease)}
+.about-text .w.lit{color:var(--dark-text)}
+.pill{display:inline-block;vertical-align:middle;width:1.18em;height:1.18em;border-radius:50%;overflow:hidden;margin:0 .1em;transform:translateY(-.06em);box-shadow:0 0 0 .06em rgba(255,250,241,.16);background:var(--brick);scale:.55;opacity:.25;rotate:-8deg;transition:scale .9s var(--spring),opacity .5s var(--ease),rotate .9s var(--spring)}
+.pill.lit{scale:1;opacity:1;rotate:0deg}
+.pill img{width:100%;height:100%;object-fit:cover}
+.pill.me img{object-position:50% 30%}
+.pill.ks{display:inline-grid;place-items:center;color:#fff;font-size:.34em;font-weight:500;letter-spacing:0;width:3.47em;height:3.47em;transform:translateY(-.2em)}
+.facts3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:clamp(48px,7vw,96px) auto 0}
+.facts3 div{border-top:1px solid #3A3D44;padding-top:14px}
+.facts3 span{display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--dark-dim)}
+.facts3 b{display:block;font-weight:400;font-size:19px;margin-top:6px}
+
+/* ===== Section heads ===== */
+.sec{padding:clamp(80px,10vw,140px) 0 0}
+.shead{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:end;margin:18px 0 clamp(32px,4vw,56px)}
+.shead h2{font-size:clamp(40px,5.4vw,84px);font-weight:500;letter-spacing:-.05em;line-height:1}
+.shead p{font-size:clamp(18px,1.6vw,21px);color:var(--muted);max-width:40ch;justify-self:end}
+
+/* ===== Portfolio grid ===== */
+.group{padding-top:clamp(28px,3vw,40px);margin-top:clamp(28px,3vw,40px);border-top:1px solid var(--line);transition:opacity .25s var(--ease),transform .25s var(--ease)}
+.group:first-of-type,.group.first{border-top:0;margin-top:0;padding-top:0}
+.group[hidden]{display:none}
+.groups.out .group{opacity:0;transform:translateY(8px)}
+.tile.swap{animation:tileIn .7s var(--ease) both;animation-delay:var(--sd,0ms)}
+@keyframes tileIn{from{opacity:0;transform:translateY(22px) scale(.98)}to{opacity:1;transform:none}}
+.cbar-wrap{display:flex;justify-content:center}
+.cbar{position:relative;display:inline-flex;flex-wrap:wrap;gap:4px;padding:6px;background:var(--card);border-radius:999px;box-shadow:var(--soft-shadow);margin-bottom:clamp(28px,3vw,40px)}
+.cb{position:relative;z-index:1;border:0;background:none;padding:11px 20px;border-radius:999px;font-size:15px;font-weight:500;letter-spacing:-.005em;cursor:pointer;color:var(--muted);transition:color .4s var(--ease),scale .2s var(--ease)}
+@media (hover:hover){.cb:hover{color:var(--ink)}}
+.cb:active{scale:.96}
+.cb[aria-pressed="true"]{color:var(--bg)}
+.cb-ind{position:absolute;left:0;top:0;border-radius:999px;background:var(--ink);pointer-events:none;z-index:0}
+.cb-ind.ready{transition:transform .6s var(--ease),width .6s var(--ease),height .6s var(--ease)}
+.ghead{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.ghead h3{font-size:clamp(26px,2.4vw,34px);font-weight:500;letter-spacing:-.035em}
+.ghead p{color:var(--muted);font-size:17px}
+.grid{--per:2;--gap:clamp(18px,2vw,28px);display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - (var(--per) - 1) * var(--gap)) / var(--per));gap:var(--gap);list-style:none;margin:-10px -6px -40px;padding:10px 6px 50px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:6px;scrollbar-width:none}
+.grid::-webkit-scrollbar{display:none}
+.grid>li{scroll-snap-align:start}
+.g-play{--per:4}
+.ghead{align-items:flex-end}
+.ghead p{margin-top:8px}
+.car-ctl{display:flex;align-items:center;gap:10px}
+.car-ctl[hidden]{display:none}
+/* a single category is picked: show every project in a normal grid */
+.groups.single .grid{grid-auto-flow:row;grid-template-columns:repeat(2,1fr);overflow:visible;scroll-snap-type:none;margin:0;padding:0}
+.groups.single .g-play{grid-template-columns:repeat(4,1fr)}
+.groups.single .car-ctl{display:none}
+@media (max-width:1000px){.groups.single .g-play{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.groups.single .grid,.groups.single .g-play{grid-template-columns:1fr}}
+.car-count{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;margin-right:6px;white-space:nowrap}
+.car-btn{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--ink);background:none;display:grid;place-items:center;cursor:pointer;transition:background .3s,color .3s,opacity .3s,scale .2s var(--ease)}
+.car-btn svg{width:20px;height:20px}
+@media (hover:hover){.car-btn:hover:not([aria-disabled="true"]){background:var(--ink);color:var(--bg)}}
+.car-btn:active:not([aria-disabled="true"]){scale:.93}
+.car-btn[aria-disabled="true"]{opacity:.3;cursor:default}
+.tile button{display:flex;flex-direction:column;width:100%;height:100%;padding:0;border:0;background:var(--card);border-radius:var(--r);box-shadow:var(--soft-shadow);text-align:left;cursor:pointer;overflow:hidden;transition:transform .6s var(--ease),box-shadow .6s var(--ease),scale .25s var(--ease)}
+.tile button:focus-visible{transform:translateY(-6px);box-shadow:var(--lift-shadow)}
+@media (hover:hover){.tile button:hover{transform:translateY(-6px);box-shadow:var(--lift-shadow)}}
+.tile button:active{scale:.985}
+.tile .img{position:relative;aspect-ratio:16/10;overflow:hidden;background:#F3EEE3;margin:10px 10px 0;border-radius:calc(var(--r) - 8px);isolation:isolate}
+.g-play .img{aspect-ratio:1/1}
+.g-research .img{aspect-ratio:16/9}
+.tile .img img{width:100%;height:100%;object-fit:cover;opacity:0;filter:blur(8px);transform:scale(1.04);transition:transform 1.1s var(--ease),opacity .8s var(--ease),filter .8s var(--ease)}
+.tile .img img.ld{opacity:1;filter:none;transform:none}
+.tile .img.contain{background:#fff;border:1px solid var(--line)}
+.tile .img.contain img{object-fit:contain;padding:3%}
+.g-research .img.contain img{padding:2%}
+.tile .img svg{width:100%;height:100%;padding:5%;background:#fff}
+.tile button:hover .img img.ld,.tile button:focus-visible .img img.ld{transform:scale(1.05)}
+.tile .img svg{transition:transform 1.1s var(--ease)}
+.tile button:hover .img>svg{transform:scale(1.04)}
+.go{position:absolute;right:12px;top:12px;z-index:2;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--bg);opacity:0;scale:.5;rotate:-45deg;transition:opacity .35s var(--ease),scale .5s var(--spring),rotate .5s var(--ease)}
+.go svg{width:18px!important;height:18px!important;padding:0!important;background:none!important}
+.tile button:hover .go,.tile button:focus-visible .go{opacity:1;scale:1;rotate:0deg}
+.tile .cap{display:flex;flex-direction:column;gap:6px;padding:18px 22px 24px}
+.tile .kind{font-size:12.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tile .cap b{font-weight:500;font-size:clamp(20px,1.7vw,24px);letter-spacing:-.022em;line-height:1.2}
+.g-play .cap b{font-size:19px}
+.tile .sub{color:var(--muted);font-size:16px;line-height:1.45}
+.tile .chip{align-self:flex-start;margin-top:4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;background:var(--gold);color:#1A1A1A;padding:5px 11px;border-radius:999px}
+
+
+/* ===== Experience ===== */
+.cv{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:24px 28px;border-radius:var(--r);background:var(--cobalt);color:#fff}
+.cv b{font-weight:500;font-size:24px;letter-spacing:-.03em}
+.cv p{color:rgba(255,255,255,.8);font-size:16px}
+.cv .btn{background:#fff;color:#111;border-color:#fff;--fill:var(--gold);--fill-ink:#111}
+@media (hover:hover){.cv .btn:hover{border-color:var(--gold)}}
+.cols{display:grid;grid-template-columns:220px 1fr;gap:clamp(20px,5vw,72px);padding-top:clamp(40px,5vw,64px)}
+.cols>h2{font-size:22px;font-weight:500;letter-spacing:-.025em;line-height:1.2}
+
+.rows{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.rows li{position:relative;display:grid;grid-template-columns:1fr auto;gap:4px 24px;padding:20px 0;border-bottom:1px solid var(--line)}
+.rows li::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:0 50%;transition:transform .7s var(--ease)}
+.rows li:hover::after{transform:scaleX(1)}
+.rows li>div,.rows li>p{transition:transform .6s var(--ease)}
+.rows li:hover>div,.rows li:hover>p{transform:translateX(8px)}
+.rows b{display:block;font-weight:500;font-size:19px;letter-spacing:-.015em}
+.rows .where{display:block;color:var(--muted);font-size:16px}
+.rows time{font-size:15px;color:var(--muted);white-space:nowrap;padding-top:3px;font-variant-numeric:tabular-nums}
+.rows p{grid-column:1/-1;color:var(--muted);font-size:16.5px;max-width:66ch;margin-top:6px}
+
+/* ===== Contact ===== */
+.contact h2{font-size:clamp(48px,9vw,156px);font-weight:500;letter-spacing:-.06em;line-height:.95;margin-top:16px}
+.contact h2 em{font-style:normal;color:var(--cream)}
+.ul{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/100% 2px no-repeat;transition:color .35s var(--ease)}
+.ul:hover{animation:ulDraw .8s var(--ease-io)}
+@keyframes ulDraw{0%{background-size:100% 2px;background-position:100% 100%}45%{background-size:0 2px;background-position:100% 100%}55%{background-size:0 2px;background-position:0 100%}100%{background-size:100% 2px;background-position:0 100%}}
+.copy{position:relative;margin-left:12px;width:44px;height:44px;display:inline-grid;place-items:center;border:1.5px solid #4A4E56;background:none;color:var(--dark-text);border-radius:50%;cursor:pointer;vertical-align:middle;transition:border-color .25s,color .25s,scale .2s var(--ease)}
+.copy:hover{border-color:var(--gold);color:var(--gold)}
+.copy:active{scale:.9}
+.copy svg{grid-area:1/1;transition:opacity .25s,scale .45s var(--spring)}
+.copy .ok{opacity:0;scale:.3}
+.copy.done{border-color:var(--gold);color:var(--gold)}
+.copy.done .cp{opacity:0;scale:.3}
+.copy.done .ok{opacity:1;scale:1}
+.dark :focus-visible{outline-color:var(--gold)}
+
+/* ===== Skills: sticky notes ===== */
+.notes{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(22px,2.8vw,40px);align-items:stretch;list-style:none;margin:0;padding:clamp(16px,2vw,28px) 0 24px}
+.note{--rot:-1.5deg;--t:#fff;position:relative;display:flex;transform:rotate(var(--rot))}
+.note:nth-child(1){--rot:-1.8deg}
+.note:nth-child(2){--rot:1.2deg}
+.note:nth-child(3){--rot:-.8deg}
+.note:nth-child(4){--rot:1.6deg}
+.note::before,.note::after{content:"";position:absolute;z-index:-1;bottom:10px;width:44%;height:24%;box-shadow:0 14px 12px rgba(30,15,0,.26);transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.note::before{left:10px;transform:rotate(-3deg)}
+.note::after{right:10px;transform:rotate(3deg)}
+.paper{flex:1;position:relative;min-height:320px;padding:30px 26px 32px;background-color:var(--c);color:var(--t);
+  background-image:linear-gradient(180deg,rgba(0,0,0,.12) 0,rgba(0,0,0,.04) 10%,rgba(0,0,0,0) 17%),linear-gradient(165deg,rgba(255,255,255,.1),rgba(255,255,255,0) 45%,rgba(0,0,0,.07)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  border-radius:2px;box-shadow:0 1px 1px rgba(0,0,0,.12),0 2px 5px -2px rgba(0,0,0,.2)}
+.paper::after{content:"";position:absolute;right:0;bottom:0;width:0;height:0;background:linear-gradient(315deg,var(--bg) 0 50%,color-mix(in srgb,var(--c) 70%,#fff) 50% 100%);box-shadow:-2px -2px 5px rgba(0,0,0,.12);border-top-left-radius:6px;transition:width .5s var(--ease),height .5s var(--ease)}
+.note h3{font-size:clamp(22px,1.9vw,26px);font-weight:500;letter-spacing:-.025em;line-height:1.15;margin-bottom:20px}
+.note ul{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+.note li{position:relative;padding-left:26px;font-size:16.5px;line-height:1.4}
+.note li::before{content:"";position:absolute;left:3px;top:.18em;width:6px;height:11px;border:solid currentColor;border-width:0 2px 2px 0;rotate:45deg;opacity:.85}
+.notes .note.rv{opacity:0;filter:none;transform:translateY(-36px) rotate(calc(var(--rot) * 4)) scale(1.06);transition:opacity .45s var(--ease),transform .9s var(--spring);transition-delay:var(--d,0ms)}
+.notes .note.rv.in{opacity:1;transform:rotate(var(--rot))}
+.notes .note.settled{transition-delay:0ms}
+@media (hover:hover){
+  .notes .note.rv.in:hover{transform:rotate(0deg) translateY(-8px)}
+  .note:hover::before{transform:rotate(-5deg) translateY(6px);box-shadow:0 22px 16px rgba(30,15,0,.24)}
+  .note:hover::after{transform:rotate(5deg) translateY(6px);box-shadow:0 22px 16px rgba(30,15,0,.24)}
+  .note:hover .paper::after{width:38px;height:38px}
+}
+[data-theme="dark"] .note::before,[data-theme="dark"] .note::after{box-shadow:0 14px 12px rgba(0,0,0,.7)}
+
+/* ===== Contact / footer ===== */
+.contact{padding-bottom:28px}
+.contact h2{font-size:clamp(40px,6.4vw,104px)}
+.contact-row{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:clamp(28px,3.6vw,48px)}
+.mail{font-size:clamp(20px,2.4vw,30px);letter-spacing:-.02em;color:var(--dark-text);padding-bottom:3px;background-size:100% 1px}
+.mail:hover{color:var(--cream)}
+.icons{display:flex;gap:10px;flex-wrap:wrap}
+.ib,.copy{width:48px;height:48px;margin:0;display:inline-grid;place-items:center;border:1.5px solid #4A4E56;border-radius:50%;background:none;color:var(--dark-text);text-decoration:none;cursor:pointer;transition:background .3s,border-color .3s,color .3s,transform .4s var(--ease),scale .2s var(--ease)}
+@media (hover:hover){.ib:hover,.copy:hover{background:var(--cream);border-color:var(--cream);color:#141414;transform:translateY(-3px)}}
+.ib:active,.copy:active{scale:.92}
+.ib svg{width:20px;height:20px}
+.copy.done{background:var(--cream);border-color:var(--cream);color:#141414}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:10px 24px;flex-wrap:wrap;margin-top:clamp(48px,6vw,80px);padding-top:20px;border-top:1px solid #2E3136;font-size:14px;color:var(--dark-dim)}
+.foot a{text-decoration:none;transition:color .3s}
+.foot a:hover{color:var(--cream)}
+
+@media (max-width:1000px){.notes{grid-template-columns:1fr 1fr;row-gap:44px}}
+@media (max-width:560px){.notes{grid-template-columns:1fr;row-gap:30px;padding-top:12px}.note:nth-child(odd){--rot:-1deg}.note:nth-child(even){--rot:1deg}.paper{min-height:300px}}
+
+/* ===== Reveal ===== */
+.rv{opacity:0;transform:translateY(28px);filter:blur(4px);transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease);transition-delay:var(--d,0ms)}
+.rv.in{opacity:1;transform:none;filter:none}
+.rv.settled{transition-delay:0ms}
+
+/* ===== Modal ===== */
+dialog.modal{width:min(980px,calc(100% - 32px));max-height:calc(100dvh - 48px);padding:0;border:0;border-radius:var(--r-lg);background:var(--card);color:var(--ink);box-shadow:0 40px 100px -30px rgba(0,0,0,.5);overflow:hidden}
+dialog.modal[open]{display:flex;flex-direction:column;animation:pop .6s var(--ease) both}
+dialog.modal[open]::backdrop{animation:fade .5s var(--ease) both}
+dialog.modal.closing{animation:popOut .32s var(--ease-io) forwards}
+dialog.modal.closing::backdrop{animation:fade .32s var(--ease-io) reverse forwards}
+@keyframes pop{from{opacity:0;transform:translateY(40px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes popOut{to{opacity:0;transform:translateY(24px) scale(.97)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+dialog.modal::backdrop{background:rgba(10,10,12,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.m-scroll{overflow-y:auto;overscroll-behavior:contain;scroll-behavior:smooth}
+.mk{font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.m-top{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 14px 14px 28px;background:color-mix(in srgb,var(--card) 85%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.m-close{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:none;border-radius:999px;padding:8px 14px 8px 16px;font-size:14px;font-weight:500;cursor:pointer;transition:background .3s,color .3s,border-color .3s,scale .2s var(--ease)}
+.m-close span{display:inline-block;transition:transform .5s var(--ease)}
+.m-close:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.m-close:hover span{transform:rotate(90deg)}
+.m-close:active{scale:.95}
+.m-body{padding:clamp(24px,4vw,44px) clamp(22px,4vw,48px) clamp(32px,5vw,56px);transition:opacity .22s var(--ease),transform .22s var(--ease)}
+.m-body.out{opacity:0;transform:translateY(-10px)}
+.m-body>*,.m-gallery figure{animation:fadeUp .8s var(--ease) both;animation-delay:calc(var(--i,0) * 60ms + 120ms)}
+.m-body h2{font-size:clamp(32px,4.4vw,58px);font-weight:500;letter-spacing:-.045em;line-height:1.02;margin-bottom:18px;max-width:20ch}
+.m-body h2:focus{outline:none}
+.m-lead{font-size:clamp(18px,1.7vw,21px);color:var(--muted);max-width:60ch}
+.m-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin:28px 0;border-top:1px solid var(--ink)}
+.m-facts div{padding:14px 16px 14px 0;border-bottom:1px solid var(--line)}
+.m-facts dt{font-size:12.5px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.m-facts dd{margin:0;font-size:16.5px}
+.m-text{display:grid;gap:14px;max-width:64ch}
+.m-text p{color:var(--muted);font-size:17px}
+.m-text h3{font-size:21px;font-weight:500;letter-spacing:-.02em;margin-top:14px}
+.m-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.m-gallery{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px}
+.m-gallery figure{margin:0}
+.m-gallery figure.wide{grid-column:1/-1}
+.m-gallery .box{border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--line);background:#fff}
+.m-gallery img,.m-gallery video{width:100%;height:auto}
+.m-gallery svg{display:block;width:100%;height:auto;background:#fff;padding:16px}
+.m-gallery figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+.m-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:clamp(40px,5vw,64px);padding-top:24px;border-top:1px solid var(--line)}
+.m-nav button{display:flex;flex-direction:column;gap:4px;padding:18px 22px;border:1px solid var(--line);border-radius:var(--r-sm);background:none;text-align:left;cursor:pointer;transition:background .35s var(--ease),border-color .35s,scale .2s var(--ease)}
+.m-nav button:last-child{text-align:right;align-items:flex-end}
+.m-nav button:hover{background:var(--bg);border-color:var(--ink)}
+.m-nav button:active{scale:.98}
+.m-nav small{font-size:12.5px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.m-nav b{font-weight:500;font-size:clamp(18px,1.8vw,22px);line-height:1.2;letter-spacing:-.025em}
+.m-nav .a{display:inline-block;transition:transform .45s var(--ease)}
+.m-nav button:first-child:hover .a{transform:translateX(-4px)}
+.m-nav button:last-child:hover .a{transform:translateX(4px)}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,24px) scale(.9);opacity:0;display:flex;align-items:center;gap:8px;background:var(--ink);color:var(--bg);padding:12px 20px 12px 16px;border-radius:999px;font-size:15px;font-weight:500;box-shadow:0 20px 40px -16px rgba(0,0,0,.4);transition:opacity .35s var(--ease),transform .55s var(--spring);z-index:90;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0) scale(1)}
+
+/* Theme switch: circular reveal (View Transitions) */
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+::view-transition-new(root){z-index:2}
+
+@media (max-width:1000px){
+  .g-work,.g-research{--per:1.5}
+  .g-play{--per:2.4}
+  .shead,.cols{grid-template-columns:1fr}
+  .shead p{justify-self:start}
+}
+@media (max-width:760px){
+  body{font-size:17px}
+  .links{display:none}
+  .ind{display:none}
+  .menu-btn{display:inline-flex}
+  .nav{padding-left:20px}
+  .nav .btn.cta{display:none}
+  .nav nav{position:static}
+  .nav.menu-open{background:var(--card);backdrop-filter:none;-webkit-backdrop-filter:none;transform:translate(-50%,0)}
+  .links.open{display:flex;flex-direction:column;gap:2px;position:absolute;left:0;right:0;top:calc(100% + 8px);background:var(--card);border-radius:24px;padding:8px;box-shadow:var(--lift-shadow);max-height:calc(100dvh - 110px);overflow-y:auto;transform-origin:50% 0;animation:drop .45s var(--ease) both}
+  .links.open li{animation:fadeUp .5s var(--ease) both;animation-delay:calc(var(--i,0) * 40ms + 60ms)}
+  .links.open a{font-size:20px;padding:14px 18px;border-radius:16px;color:var(--ink)}
+  .links.open a[aria-current="true"]{background:var(--bg)}
+  .g-work,.g-research{--per:1.12}
+  .g-play{--per:1.45}
+  .car-count{display:none}
+  .facts3{grid-template-columns:1fr}
+  .m-gallery{grid-template-columns:1fr}
+  .rows li{grid-template-columns:1fr}
+  .dark::before{top:-40px;height:80px}
+  #about::after{bottom:-40px;height:80px}
+  #about + .sec{padding-top:110px}
+  .dark{padding:84px 0 72px}
+  #about{transform:none}
+  .hero-sub{white-space:normal;max-width:34ch}
+  .about-text{margin-top:0;font-size:clamp(22px,6.2vw,28px);line-height:1.22;letter-spacing:-.025em}
+  .hero{min-height:88svh;padding:110px 0 80px}
+  .cbar-wrap{display:block}
+  .cbar{display:grid;grid-template-columns:1fr 1fr;width:100%;border-radius:22px}
+  .cb{padding:12px 8px;text-align:center;border-radius:16px}
+  .cb-ind{border-radius:16px}
+  .scroll-cue{display:none}
+  .go{opacity:1;scale:.85;rotate:0deg}
+  dialog.modal{width:100%;max-width:100%;margin:auto 0 0;max-height:94dvh;border-radius:28px 28px 0 0}
+  dialog.modal[open]{animation:sheet .6s var(--ease) both}
+  dialog.modal.closing{animation:sheetOut .35s var(--ease-io) forwards}
+  .m-nav{grid-template-columns:1fr}
+  .m-nav button:last-child{text-align:left;align-items:flex-start}
+}
+@keyframes drop{from{opacity:0;transform:translateY(-8px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes sheet{from{transform:translateY(100%)}to{transform:none}}
+@keyframes sheetOut{to{transform:translateY(100%)}}
+@media (hover:none){
+  .rows li:hover>div,.rows li:hover>p{transform:none}
+  .rows li:hover::after{transform:scaleX(0)}
+}
+@media (prefers-reduced-motion:reduce){
+  html,.m-scroll{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0ms!important}
+  .rv{opacity:1;transform:none;filter:none}
+  .hero h1 .ln>span{transform:none}
+  .pill{scale:1;opacity:1;rotate:0deg}
+  .tile .img img{opacity:1;filter:none;transform:none}
+  .scroll-cue{display:none}
+}
 </style>
 </head>
-
 <body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
+<header class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Keya Shah, back to top">keya<i aria-hidden="true">.</i></a>
+  <nav aria-label="Main">
+    <ul class="links" id="links">
+      <li><a href="#top" data-spy="top">Home</a></li>
+      <li><a href="#about" data-spy="about">About</a></li>
+      <li><a href="#work" data-spy="work">Work</a></li>
+      <li><a href="#skills" data-spy="skills">Skills</a></li>
+      <li><a href="#experience" data-spy="experience">Experience</a></li>
+    </ul>
+    <span class="ind" id="navInd" aria-hidden="true"></span>
+  </nav>
+  <div class="nav-r">
+    <button class="theme" id="theme" type="button" aria-pressed="false" aria-label="Dark mode" title="Dark mode"><svg class="moon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><svg class="sun" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></g></svg></button>
+    <a class="btn cta" href="#contact" data-mag>Contact</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="links"><span class="mb-ic" aria-hidden="true"><i></i><i></i></span><span class="mb-t">Menu</span></button>
+  </div>
+</header>
 
-      <div class="logo">
-        <h1 class="nametag"><a href="index.html">keya. </a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-      </div>
+<main id="main" tabindex="-1">
 
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto " href="#faq">Work Experience</a></li>
-          <li><a class="nav-link scrollto " href="https://medium.com/p/a3b92a269015#3aa9-f61dfae5a124">Blog</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <!-- <li><a class="getstarted scrollto" href="#about">Get Started</a></li> -->
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-    </div>
-  </header><!-- End Header -->
-
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
-
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1 data-aos="fade-up">Hello World!</h1>
-          <h2 data-aos="fade-up" data-aos-delay="400">I'm Keya</h2>
-          <div data-aos="fade-up" data-aos-delay="800">
-            <a href="#about" class="btn-get-started scrollto">Get to know me?</a>
-          </div>
-        </div>
-        
-        <div class="col-lg-4 order-1 order-lg-2 hero-img d-flex align-items-center justify-content-center" data-aos="fade-left" data-aos-delay="200">
-          <div class="left right">
-            <img src="images/me_.png" class="img-fluid animated" alt="">
-            
-          </div>
-        </div>
-        <div class="col-lg-4 order-1 order-lg-2 hero-img d-flex align-items-center justify-content-center" data-aos="fade-left" data-aos-delay="200">
-          <div class="right"><h1 class="animate-charcter">&lt;coder&gt;<br>designer<br>
-            explorer <br> traveller</div>
-        </div>
+<!-- HERO -->
+<section class="hero" id="top" aria-labelledby="h1">
+  
+  <div class="wrap">
+    <h1 id="h1"><span class="ln"><span style="--i:0">I design things</span></span><span class="ln"><span style="--i:1"><em>that</em> work for everyone.</span></span></h1>
+    <!-- <p class="hero-sub">I care about digital accessibility, inclusive design and assistive technology.</p> -->
+    <div class="hero-foot">
+      <!-- <p><b>Keya Shah</b>, accessibility designer and engineer in London. I build assistive tech and inclusive products with disabled people, from classroom tools in the UAE to research on AI wellbeing coaches.</p> -->
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn" href="#work" data-mag>See my work <span class="arr" aria-hidden="true">↓</span></a>
+        <a class="btn ghost" href="assets/Keya-Shah-CV.pdf" target="_blank" rel="noopener" data-mag>CV <span class="arr" aria-hidden="true">↗</span><span class="sr-only"> (PDF, opens in new tab)</span></a>
       </div>
     </div>
-  
-  </section>
-  <!-- End Hero -->
-
-  <main id="main">
-
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-      <div class="container">
-    
-        <div class="section-title" data-aos="fade-up">
-          <h2>About Me</h2>
-        </div>
-    
-        <div class="row content">
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
-            <!-- <video autoplay loop>
-              <source src="/images/hi.mp4" class="img-fluid new" alt="About Me">
-            </video>  -->
-            <img src="./images/hi.png">
-          </div>
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
-            <p>
-              I love all-things-tech! I'm a senior currently pursuing Computer Science & Interactive media at New York University Abu Dhabi
-            </p>
-            <ul>
-              <li><i class="ri-check-double-line"></i> 🖥️ I Can Code: Lines of code are my paintbrush, and I love crafting solutions to real-world problems.</li>
-              <li><i class="ri-check-double-line"></i> 🎨 I Can Design: Beyond coding, I have a keen eye for design, transforming ideas into visually compelling creations.</li>
-              <li><i class="ri-check-double-line"></i> I Can Be Socially Awkward: Yes, I'm a proud member of the socially awkward club, but it only makes for more interesting conversations!</li>
-              <li><i class="ri-check-double-line"></i> 🎤 I Can Sing & Dance: When I'm not immersed in tech, you might catch me belting out tunes or breaking into spontaneous dance moves.</li>
-              <li><i class="ri-check-double-line"></i> 🍰 I Can Cheesecake All Day Every Day: Cheesecake is my ultimate comfort food; it's not just a dessert—it's a lifestyle.</li>
-            </ul>
-          </div>
-    
-         
-        </div>
-    
-      </div>
-    </section>
-  
-    <!-- ======= Skills Section ======= -->
-    <section id="features" class="features">
-      <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-          <h2>Skills</h2>
-          <p></p>
-        </div>
-
-        <div class="row" data-aos="fade-up" data-aos-delay="300">
-          <div class="col-lg-3 col-md-4">
-            <div class="icon-box">
-              <iconify-icon icon="devicon:python-wordmark"></iconify-icon>
-              <h3><a href="">Python</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-            <div class="icon-box">
-              <iconify-icon icon="file-icons:c"></iconify-icon>
-              <h3><a href="">C++</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-            <div class="icon-box">
-              <iconify-icon icon="devicon:c"></iconify-icon>
-              <h3><a href="">C</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
-            <div class="icon-box">
-              <iconify-icon icon="devicon:javascript"></iconify-icon>
-              <h3><a href="">Java Script</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <iconify-icon icon="devicon:p5js"></iconify-icon>
-              <h3><a href="">P5.js & Processing</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <iconify-icon icon="logos:html-5" style="color: orange; padding-left: 1%;"></iconify-icon>
-              <h3><a href="">HTML</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <iconify-icon icon="vscode-icons:file-type-css" style="color: orange; padding-left: 1%;"></iconify-icon>
-              <h3><a href="">CSS & Bootstrap</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <iconify-icon icon="ph:file-sql-thin" style="color: orange; padding-left: 1%;"></iconify-icon>
-              <h3><a href="">SQL</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <iconify-icon icon="devicon:r" style="color: orange; padding-left: 1%;"></iconify-icon>
-              <h3><a href="">R</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <iconify-icon icon="simple-icons:googlecolab" style="color: orange; padding-left: 1%;"></iconify-icon>
-              <h3><a href="">Jupyter Notebooks</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <iconify-icon icon="devicon:opencv"></iconify-icon>
-              <h3><a href="">OpenCv</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <iconify-icon icon="cib:adobe-creative-cloud"></iconify-icon>
-              <h3><a href="">Adobe Creative Suite</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <iconify-icon icon="file-icons:audacity" style="color: blue; padding-left: 1%; "></iconify-icon>
-              <h3><a href="">Audacity</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <iconify-icon icon="devicon:figma" style="color: blue; padding-left: 1%;"></iconify-icon>
-              <h3><a href="">Figma</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <iconify-icon icon="devicon-plain:arduino-wordmark"></iconify-icon>
-              <h3><a href="">Arduino</a></h3>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 mt-4">
-            <div class="icon-box">
-              <iconify-icon icon="devicon:unity"></iconify-icon>
-              <h3><a href="">Unity</a></h3>
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-    </section>
-    <!-- End Features Section -->
-
-    <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
-      <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-          <h2>Portfolio</h2>
-          <p>Some of the projects I've worked on</p>
-        </div>
-
-        <div class="row" data-aos="fade-up" data-aos-delay="200">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">Comms Lab</li>
-              <li data-filter=".filter-card">Intro to IM</li>
-              <li data-filter=".filter-web">Others</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
-
-          <!-- Assignment 1 -->
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app"  >
-            <div class="portfolio-wrap" href="https://github.com/keys19/k2e-dashboard">
-              <img src="images/home-k2e.png" class="img-fluid" alt="" >
-              <div class="portfolio-info">
-                <h4>Key2Enable</h4>
-                <p>An Inclusive Teacher and Student App for an Assistive Tech powered classroom</p>
-                <div class="portfolio-links">
-              
-                  <a href="https://github.com/keys19/k2e-dashboard" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app"  >
-            <div class="portfolio-wrap" href="https://github.com/keys19/mood-check">
-              <img src="images/mood.png" class="img-fluid" alt="" >
-              <div class="portfolio-info">
-                <h4>MoodCheck</h4>
-                <p> Accessible Student Mood Tracker with Assistive Tech Keyboard Integration</p>
-                <div class="portfolio-links">
-              
-                  <a href="https://github.com/keys19/mood-check" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app"  >
-            <div class="portfolio-wrap" href="https://github.com/keys19/plantwise">
-              <img src="images/plantwise.png" class="img-fluid" alt="" >
-              <div class="portfolio-info">
-                <h4>Plantwise</h4>
-                <p> Discover. Share. Thrive. Your hub for sustainable and eco-friendly living.</p>
-                <div class="portfolio-links">
-              
-                  <a href="https://github.com/keys19/plantwise" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app"  >
-            <div class="portfolio-wrap" href="https://github.com/keys19/molab-2024-09-keya/tree/main/week14-final/FinalProject">
-              <img src="images/journo.png" class="img-fluid" alt="" >
-              <div class="portfolio-info">
-                <h4>Journo</h4>
-                <p> Your iOS mindfulness joruney!</p>
-                <div class="portfolio-links">
-              
-                  <a href="https://github.com/keys19/molab-2024-09-keya/tree/main/week14-final/FinalProject" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app"  >
-            <div class="portfolio-wrap" href="https://keys19.github.io/commlab_1/">
-              <img src="images/appreciation_archive.png" class="img-fluid" alt="" >
-              <div class="portfolio-info">
-                <h4>Appreciation Archive</h4>
-                <p>A digital Gratitude Journal</p>
-                <div class="portfolio-links">
-              
-                  <a href="https://keys19.github.io/commlab_1/" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Assignment video-->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="images/cookie2.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Where's my Cookie?</h4>
-                <p>Make morally dillematic choices to save your life on the adventure of a missing cookie</p>
-                <div class="portfolio-links">
-                  
-                  <a href="https://keys19.github.io/video_commlab/" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-    
-          <!-- assignment sound -->
-        
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="images/audio.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Sounds of the world</h4>
-                <p>A Soundscape to immerse yourself in the sounds and cultures around the world</p>
-                <div class="portfolio-links">
-                  <a href="https://fadyjohn10.github.io/Comm-Lab/Comm%20Lab%20Assignment3/" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-      
-
-
-          <!-- assignment comic -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="images/comic.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Professor's Wrath</h4>
-                <p>A compelling and gripping Interactive comic where you make choices to survive University</p>
-                <div class="portfolio-links">
-                  <a href="https://maheat.github.io/comic/index.html" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- assignment illustrator -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="images/donut.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Donut Worry</h4>
-                <p>illustrator, svgs and more</p>
-                <div class="portfolio-links">
-                  <a href="https://keys19.github.io/illustrator_donut/" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- assignment parallax -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="images/parallax.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Space explorer</h4>
-                <p>Parallax</p>
-                <div class="portfolio-links">
-                  <a href="https://keys19.github.io/parallax_web/" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Self -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="images/self.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Self portrait</h4>
-                <p>A dog, peace & I</p>
-                <div class="portfolio-links">
-                  <a href="https://editor.p5js.org/keyaa/sketches/yUCMVaS6E" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <!-- Christmas -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="images/christmas.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Early Christmas</h4>
-                <p>An Interactive Christmas experience with a countdown</p>
-                <div class="portfolio-links">
-                  <a href="https://editor.p5js.org/keyaa/full/lvw7KccaA " target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-           <!-- sound visualizer -->
-           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="images/soundvisualizer.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Sound visualizer</h4>
-                <p>An Interactive Sound Visualizer</p>
-                <div class="portfolio-links">
-                  <a href="https://editor.p5js.org/keyaa/full/S7YuiyR5w" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- aurora-->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="images/aurora.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4> Northern lights Dream</h4>
-                <p>Auroras</p>
-                <div class="portfolio-links">
-                  <a href="https://editor.p5js.org/keyaa/sketches/xzA_sLgXn"target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Znetangle -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="images/zen.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Zentangle</h4>
-                <p>Therapeutic Digital escape</p>
-                <div class="portfolio-links">
-                  <a href="https://editor.p5js.org/keyaa/sketches/LA3iRgGPK" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- moodlamp -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="images/moodlamp.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Mood Lamp</h4>
-                <p>Basic Implementation of a mood lamp</p>
-                <div class="portfolio-links">
-                  <a href="https://youtu.be/rOUMIQX6yn4" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- ligthshoe -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="images/lightshoe.png" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Light Shoe</h4>
-                <p>Basic Implementation of a light shoe with an unual switch</p>
-                <div class="portfolio-links">
-                  <a href="https://youtu.be/rOUMIQX6yn4"target=”_blank  title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <!-- westem -->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web" style="border: #020202 10px;">
-            <div class="portfolio-wrap">
-              <img src="images/westem.png" class="img-fluid" alt="" >
-              <div class="portfolio-info">
-                <h4>Westem @ NYUAD</h4>
-                <p>Website</p>
-                <div class="portfolio-links">
-                  <a href="https://westem-nyuad.github.io/web/index.html" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Unity game - Odyssey-->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web" style="border: #020202 10px;">
-            <div class="portfolio-wrap">
-              <img src="images/odyssey.jpg" class="img-fluid" alt="" >
-              <div class="portfolio-info">
-                <h4>Odyssey</h4>
-                <p>A Platformer Game on Unity</p>
-                <div class="portfolio-links">
-                  <a href="https://github.com/fhgggtyf/FinalProjectGamesAndPlay?tab=readme-ov-file" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                  <a href="https://www.canva.com/design/DAGEeBRAOz4/5Dw8rmvWIJC1sy-iNteJaw/view?utm_content=DAGEeBRAOz4&utm_campaign=designshare&utm_medium=link&utm_source=editor" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Unity game - Racing Game-->
-          <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-web" style="border: #020202 10px;">
-            <div class="portfolio-wrap">
-              <img src="images/race.png" class="img-fluid" alt="" >
-              <div class="portfolio-info">
-                <h4>3d racer</h4>
-                <p>A 3d Racing Game on Unity</p>
-                <div class="portfolio-links"> -->
-                  <!-- <a href="https://github.com/keys19/RacingGame_Unity" target=”_blank title="More Details"><i class="bx bx-link"></i></a> -->
-                  <!-- <a href="https://drive.google.com/file/d/1azen35Bc_YJgblGeAk25u_gr4brokYT7/view?usp=drive_link" target=”_blank title="More Details"><i class="bx bx-link"></i></a> -->
-                <!-- </div>
-              </div>
-            </div>
-          </div> -->
-
-          <!-- Unity game - Racing Game-->
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web" style="border: #020202 10px;">
-            <div class="portfolio-wrap">
-              <img src="images/race.png" class="img-fluid" alt="" >
-              <div class="portfolio-info">
-                <h4>3d racer</h4>
-                <p>A 3d Racing Game on Unity</p>
-                <div class="portfolio-links">
-                  <a href="https://github.com/keys19/RacingGame_Unity" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                  <!-- <a href="https://drive.google.com/file/d/1azen35Bc_YJgblGeAk25u_gr4brokYT7/view?usp=drive_link" target=”_blank title="More Details"><i class="bx bx-link"></i></a> -->
-                </div>
-              </div>
-            </div>
-          </div>
-
-           <!-- literature of migration -->
-           <div class="col-lg-4 col-md-6 portfolio-item filter-web" style="border: #020202 10px;">
-            <div class="portfolio-wrap">
-              <img src="images/lom.png" class="img-fluid" alt="" >
-              <div class="portfolio-info">
-                <h4>Hina's embrace</h4>
-                <p>Literature of Migration - Digital Narrative</p>
-                <div class="portfolio-links">
-                  <a href="https://keys19.github.io/lomfinal/" target=”_blank title="More Details"><i class="bx bx-link"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          
-
-
-      </div>
-    </section><!-- End Portfolio Section -->
-
-
-  
-
-    <!-- ======= Work Experience Section ======= -->
-    <section id="faq" class="faq">
-      <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-          <h2>Work Experience</h2>
-        </div>
-
-        <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-           <div class="col-lg-5">
-            <i class="ri-focus-2-fill" style="color: #670feb;"></i>
-            <h4>Assistive Tech Junior Specialist Intern - Key2Enable Assistive Technology <br> May 2025 - Present  </h4>
-          </div>
-          <div class="col-lg-7">
-            <p>
-               Designing user-friendly interfaces and integrating assistive tech into learning environments. Supporting the research, testing, and enhancement of Key2Enable’s hardware and software solutions for accessibility.
-          </div>
-        </div><!-- End F.A.Q Item-->
-
-        <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-           <div class="col-lg-5">
-            <i class="ri-focus-2-fill" style="color: #670feb;"></i>
-            <h4>Research Assistant - Social Machines and RoboTics Lab NYU Abu Dhabi <br> March 2025 - Present  </h4>
-          </div>
-          <div class="col-lg-7">
-            <p>
-               Research LLM-based frameworks to support differential diagnosis of mental health conditions such as ASD and ADHD. Developing multimodal pipelines using structured clinical data, speech input, and LLM reasoning to enhance diagnostic accuracy.
-            </p>
-          </div>
-        </div><!-- End F.A.Q Item-->
-
-        <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-           <div class="col-lg-5">
-            <i class="ri-focus-2-fill" style="color: #670feb;"></i>
-            <h4>AI Student Assistant - Center for Academic Technology NYU Abu Dhabi <br> March 2025 - Present  </h4>
-          </div>
-          <div class="col-lg-7">
-            <p>
-              Conducting QA testing on NYU’s private GenAI tool and provided detailed feedback to enhance performance and usability. Supporting AI research and technical operations within an Agile academic environment.
-            </p>
-          </div>
-        </div><!-- End F.A.Q Item-->
-
-        <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-          <div class="col-lg-5">
-            <i class="ri-focus-2-fill" style="color: #670feb;"></i>
-            <h4>Full Stack intern - Al Fahad Enterprises <br> December 2024 - January 2025  </h4>
-          </div>
-          <div class="col-lg-7">
-            <p>
-              Developing and enhancing web applications with robust front-end and back-end functionalities for seamless user experiences. Working in an Agile environment to iterate on features, troubleshoot issues, and ensure optimal system performance.
-            </p>
-          </div>
-        </div><!-- End F.A.Q Item-->
-
-        <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-          <div class="col-lg-5">
-            <i class="ri-focus-2-fill" style="color: #670feb;"></i>
-            <h4>CITIES Research Assistant - SONIX <br> January 2024 - December 2024  </h4>
-          </div>
-          <div class="col-lg-7">
-            <p>
-              Collection and preprocessing of Data, Parameterizing and training ML models to identify different facets, Visualization of the sonic scape to tackle the issue and find solutions to mitigate the effects of noise
-pollution on people's psychological and physical health Using OpenCv and Python
-            </p>
-          </div>
-        </div><!-- End F.A.Q Item-->
-
-        <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-          <div class="col-lg-5">
-            <i class="ri-focus-2-fill" style="color: #670feb;"></i>
-            <h4>Fellow - Silicon Valley Fellowship<br> October 2024 - November 2024 </h4>
-          </div>
-          <div class="col-lg-7">
-            <p>
-              Selected among the top 4% globally for excellence in technology and leadership, with access to mentorship from top-tier
-companies (Apple, Google, Amazon, Tesla) in San Francisco, USA
-            </p>
-          </div>
-        </div><!-- End F.A.Q Item-->
-
-        <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-          <div class="col-lg-5">
-            <i class="ri-focus-2-fill" style="color: #670feb;"></i>
-            <h4>Head of Web, WeSTEM @ NYUAD  <br> January 2023 - September 2024  </h4>
-          </div>
-          <div class="col-lg-7">
-            <p>
-              Leading a web development team and building a website for a student interest group for Women in Stem 
-            </p>
-          </div>
-        </div><!-- End F.A.Q Item-->
-
-        <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-lg-5">
-            <i class="ri-focus-2-fill" style="color: #670feb;"></i>
-            <h4>Weyak Leader <br> August 2023 - May 2024</h4>
-          </div>
-          <div class="col-lg-7"> 
-            <p>
-              First Year Resident Assisstant and Dialogue Facilitator
-            </p>
-          </div>
-        </div><!-- End F.A.Q Item-->
-
-
-        <div class="row faq-item d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
-          <div class="col-lg-5">
-            <i class="ri-focus-2-fill" style="color: #670feb;"></i>
-            <h4>Simulation Engineer, Neurobotx <br> June 2023 - August 2023 (Summer Internship) </h4>
-          </div>
-          <div class="col-lg-7">
-            <p>
-              Utilize simulation software and tools to create accurate and efficient models for a metapilot game.  
-            </p>
-          </div>
-        </div><!-- End F.A.Q Item-->
-
-
-      </div>
-    </section><!-- End F.A.Q Section -->
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-          <h2>Contact</h2>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="contact-about">
-              <p>Feel free to</p>
-              <h5>Say Hi to me or reach out anywhere at: </h5>
-              <div class="social-links">
-                <a href="#" class="twitter"><i class="bi bi-twitter" style="color: #0f81eb;"></i></a>
-                <a href="https://www.facebook.com/profile.php?id=100077285785191" class="facebook"><i class="bi bi-facebook" style="color: #210feb;"></i></a>
-                <a href="https://www.instagram.com/keys.19/" class="instagram"><i class="bi bi-instagram" style="color: #eb0f8c;"></i></a>
-                <a href="https://www.linkedin.com/in/keya-shah-545b6b219/" class="linkedin"><i class="bi bi-linkedin" style="color: #0fbfeb;"></i></a>
-                <a href="https://github.com/keys19" class="github"><i class="ri-github-fill" style="color: #eb630f;"></i></a>
-                <a href="mailto:kts5726@nyu.edu" class="mail"><i class="ri-mail-fill" style="color: #eb0f8c;"></i></a>
-                <!-- <a href="./cv.pdf" target="_blank" ><i class="ri-mail-fill" style="color: #eb0f8c;"></i></a> -->
-              </div>
-
-              <div data-aos="fade-up" data-aos-delay="800">
-                <a href="SHAH_CV.pdf" target="_blank" class="btn-get-started scrollto">View my CV </a>
-              </div>
-              <div class="info">
-                <div>
-                  <i class="ri-map-pin-line" style="color: #670feb;"></i>
-                  <p>New York University, Abu Dhabi</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <!-- form embedded  -->
-          <div class="col-lg-5 col-md-12" data-aos="fade-up" data-aos-delay="300">
-            <div class="form">
-              <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe9cb1zNYePbm1uqjNEbf7hhxXH_dxvwAfSiU9ZRTPWlLVUpQ/viewform?embedded=true" width="800" height="303" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-            </div>
-          </div>
-        </div>
-        
-
-        
-
-        
-
-      </div>
-    </section><!-- End Contact Section -->
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      <div class="row d-flex align-items-center">
-        <div class="col-lg-6 text-lg-left text-center">
-          <!-- <div class="copyright">
-            &copy; Copyright <strong>keya</strong>. All Rights Reserved
-          </div> -->
-          <!-- <div class="credits"> -->
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/vesperr-free-bootstrap-template/ -->
-            <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
-          <!-- </div>
-        </div>
-        <div class="col-lg-6">
-          <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
-            <a href="#intro" class="scrollto">Home</a>
-            <a href="#about" class="scrollto">About</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
-          </nav>
-        </div>
-      </div> -->
+  </div>
+  <span class="scroll-cue" aria-hidden="true"></span>
+</section>
+
+<!-- ABOUT -->
+<section class="dark" id="about" aria-labelledby="h-about">
+  <div class="wrap center">
+    <h2 class="sr-only" id="h-about">About me</h2>
+<p class="about-text" id="aboutText">Hi, I'm <span class="pill ks" data-photo aria-hidden="true">KS</span> Keya. I work in digital accessibility, inclusive design and assistive tech <span class="pill" aria-hidden="true"><img src="assets/echo.webp" alt=""></span>, building with people with disabilities and the communities around them. I studied Computer Science and Interactive Media at NYU Abu Dhabi <span class="pill" aria-hidden="true"><img src="assets/zho-lab-poster.jpg" alt=""></span>, and I'm now doing an MSc in Disability, Design and Innovation at UCL.</p>  </div>
+</section>
+
+<!-- WORK -->
+<section class="sec" id="work" aria-labelledby="h-work">
+  <div class="wrap">
+    <div class="shead"><h2 id="h-work" class="rv">Things I've made</h2></div>
+    <div class="cbar-wrap"><div class="cbar" role="group" aria-label="Show projects">
+      <span class="cb-ind" id="cbInd" aria-hidden="true"></span>
+      <button type="button" class="cb" data-show="all" aria-pressed="true">All work</button>
+      <button type="button" class="cb" data-show="work" aria-pressed="false">Products in use</button>
+      <button type="button" class="cb" data-show="research" aria-pressed="false">Research</button>
+      <button type="button" class="cb" data-show="play" aria-pressed="false">Side &amp; fun projects</button>
+    </div></div>
+    <p class="sr-only" id="cbLive" aria-live="polite"></p>
+    <div class="groups" id="groups">
+    <div class="group" data-grp="work" role="region" aria-roledescription="carousel" aria-labelledby="gh-work"><div class="ghead"><div><h3 id="gh-work">Products in use</h3><p>Tools and websites people use every day.</p></div><div class="car-ctl" hidden><span class="car-count" aria-hidden="true"></span><button type="button" class="car-btn" data-dir="-1" aria-controls="track-work" aria-label="Previous Products in use projects"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="car-btn" data-dir="1" aria-controls="track-work" aria-label="Next Products in use projects"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div><ul class="grid g-work" id="track-work" data-g="work"></ul></div>
+    <div class="group" data-grp="research" role="region" aria-roledescription="carousel" aria-labelledby="gh-research"><div class="ghead"><div><h3 id="gh-research">Research</h3><p>Papers and studies on AI, wellbeing and language.</p></div><div class="car-ctl" hidden><span class="car-count" aria-hidden="true"></span><button type="button" class="car-btn" data-dir="-1" aria-controls="track-research" aria-label="Previous Research projects"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="car-btn" data-dir="1" aria-controls="track-research" aria-label="Next Research projects"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div><ul class="grid g-research" id="track-research" data-g="research"></ul></div>
+    <div class="group" data-grp="play" role="region" aria-roledescription="carousel" aria-labelledby="gh-play"><div class="ghead"><div><h3 id="gh-play">Side &amp; fun projects</h3><p>Installations, games and other things I made for fun.</p></div><div class="car-ctl" hidden><span class="car-count" aria-hidden="true"></span><button type="button" class="car-btn" data-dir="-1" aria-controls="track-play" aria-label="Previous Side &amp; fun projects projects"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" class="car-btn" data-dir="1" aria-controls="track-play" aria-label="Next Side &amp; fun projects projects"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div><ul class="grid g-play" id="track-play" data-g="play"></ul></div>
     </div>
-  </footer><!-- End Footer -->
+  </div>
+</section>
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<!-- SKILLS -->
+<section class="sec" id="skills" aria-labelledby="h-skills">
+  <div class="wrap">
+    <div class="shead"><h2 id="h-skills" class="rv">What I'm good at</h2><p class="rv" style="--d:120ms">I like being part of the whole thing: talking to people, sketching the flow, building it, then testing it with the people who'll use it.</p></div>
+    <ul class="notes">
+      <li class="note rv" style="--c:var(--brick);--d:0ms"><div class="paper"><h3>Accessibility</h3><ul><li>WCAG 2.2 audits</li><li>Screen reader testing with VoiceOver, NVDA and TalkBack</li><li>Keyboard testing and ARIA</li><li>Accessible design systems</li><li>CPACC</li></ul></div></li>
+      <li class="note rv" style="--c:var(--cobalt);--d:110ms"><div class="paper"><h3>Engineering</h3><ul><li>React, Next.js and TypeScript</li><li>Node.js and PostgreSQL</li><li>Python</li><li>LLM agents</li><li>Arduino and physical computing</li></ul></div></li>
+      <li class="note rv" style="--c:var(--green);--d:220ms"><div class="paper"><h3>Research</h3><ul><li>User research and interviews</li><li>Co-design</li><li>Usability testing</li><li>Study design</li></ul></div></li>
+      <li class="note rv" style="--c:var(--gold);--t:#1A1A1A;--d:330ms"><div class="paper"><h3>Design</h3><ul><li>Designing complex, user-centred systems</li><li>Interaction design and user flows</li><li>Wireframes and prototypes in Figma</li><li>Bilingual Arabic and English layouts</li><li>Physical prototyping with 3D printing and laser cutting</li><li>Creative coding</li></ul></div></li>
+    </ul>
+  </div>
+</section>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+<!-- EXPERIENCE -->
+<section class="sec" id="experience" aria-labelledby="h-exp">
+  <div class="wrap">
+    <div class="shead"><h2 id="h-exp" class="rv">Where I've worked</h2><p class="rv" style="--d:120ms">Assistive tech, HCI research and full-stack development, from Abu Dhabi to New York to London.</p></div>
+    <div class="cv rv"><div><b>Curriculum vitae</b></div><a class="btn" href="assets/Keya-Shah-CV.pdf" target="_blank" rel="noopener">Open CV <span class="arr" aria-hidden="true">↗</span><span class="sr-only"> (PDF, opens in new tab)</span></a></div>
+    <div class="cols">
+      <h2>Roles</h2>
+      <ul class="rows">
+        <li><div><b>Assistive Tech Junior Specialist</b><span class="where">Key2Enable Assistive Technology · Abu Dhabi</span></div><time>Jun 2025 – Aug 2026</time>
+          <p>Designed, built and shipped the learning portal now used by teachers at Zayed Higher Organization: attendance, lesson plans, assessments, wellbeing logs and AI-drafted progress reports in several languages. Cut teachers' prep and documentation time by over 40%.</p></li>
+        <li><div><b>Research Assistant</b><span class="where">SMART Lab, NYU Abu Dhabi</span></div><time>Mar 2025 – Jul 2026</time>
+          <p>Designed and built GROW, an LLM wellbeing coach, and ran a two-phase user study. Co-authored a paper at HRI 2026. Also worked on embodied persuasion in social robots.</p></li>
+        <li><div><b>AI Focus Assistant</b><span class="where">Center for Academic Technology, NYU Abu Dhabi</span></div><time>Mar 2025 – Nov 2025</time>
+          <p>Ran accessibility evaluations and UI testing of NYU's private generative AI tool with NYU IT in New York, and helped faculty bring AI into their teaching and research.</p></li>
+        <li><div><b>Software and Wiki Developer</b><span class="where">iGEM, NYU Abu Dhabi team</span></div><time>Jan 2025 – Nov 2025</time>
+          <p>Built the team's wiki and data visualisations in Next.js. The team won a Gold Medal at the iGEM Grand Jamboree in Paris.</p></li>
+        <li><div><b>Full Stack Developer Intern</b><span class="where">Al Fahad Enterprises · Abu Dhabi</span></div><time>Dec 2024 – Jan 2025</time></li>
+        <li><div><b>Research Assistant</b><span class="where">CITIES, SONIX urban noise project · Abu Dhabi</span></div><time>Jan 2024 – Dec 2024</time></li>
+        <li><div><b>Head of Web</b><span class="where">weSTEM, NYU Abu Dhabi</span></div><time>Jan 2023 – Sep 2024</time></li>
+      </ul>
+    </div>
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+    <div class="cols">
+      <h2>Education</h2>
+      <ul class="rows">
+        <li><div><b>MSc Disability, Design and Innovation</b><span class="where">University College London, Dept. of Computer Science</span></div><time>2026 – 2027</time></li>
+        <li><div><b>BS Computer Science and Interactive Media</b><span class="where">New York University Abu Dhabi · GPA 3.82</span></div><time>2022 – 2026</time></li>
+      </ul>
+    </div>
 
-  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    
+    <div class="cols">
+      <h2>Awards, community and leadership</h2>
+      <ul class="rows">
+        <li><div><b>Communication Award, Universal Design for Inclusion Program</b><span class="where">National Multiple Sclerosis Society UAE · for ECHO</span></div><time>2025</time></li>
+        <li><div><b>Gold Medal, iGEM Grand Jamboree</b><span class="where">Paris · NYU Abu Dhabi team</span></div><time>2025</time></li>
+        <li><div><b>Silicon Valley Fellowship</b><span class="where">San Francisco · selected from the top 4% of applicants</span></div><time></time></li>
+        <li><div><b>Tech Coach</b><span class="where">DOROT · New York · coaching older adults in using phones and video calls</span></div><time></time></li>
+        <li><div><b>Resident Assistant</b><span class="where">Residential Life, NYU Abu Dhabi</span></div><time></time></li>
+        <li><div><b>Social media volunteer</b><span class="where">Shishu Kalyan Kendra, special education school · Mumbai</span></div><time></time></li>
+        <li><div><b>Hackathons</b><span class="where">Llama 3 Hackathon (lablab.ai) · Quantum Computing Hackathon for Social Good in the Arab World</span></div><time></time></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="dark contact" id="contact" aria-labelledby="h-contact" style="margin-top:clamp(100px,12vw,180px)">
+  <div class="wrap">
+    <h2 id="h-contact" class="rv">Let's make <em>something</em> together.</h2>
+    <div class="contact-row rv">
+      <a class="mail ul" href="mailto:kts5726@nyu.edu">kts5726@nyu.edu</a>
+      <div class="icons">
+        <button class="copy" type="button" data-copy="kts5726@nyu.edu" aria-label="Copy email address" title="Copy email address"><svg class="ok" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="cp" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="8" y="8" width="12" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button>
+        <a class="ib" href="https://www.linkedin.com/in/keya-t-shah/" target="_blank" rel="noopener" aria-label="LinkedIn (opens in new tab)" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.6h.05c.53-1 1.83-2 3.77-2 4.03 0 4.78 2.55 4.78 5.86v5.54h-4v-4.9c0-1.17-.02-2.68-1.63-2.68-1.64 0-1.89 1.28-1.89 2.6v4.98h-4z"/></svg></a>
+        <a class="ib" href="https://github.com/keys19" target="_blank" rel="noopener" aria-label="GitHub (opens in new tab)" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2.2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2.2z"/></svg></a>
+        <a class="ib" href="assets/Keya-Shah-CV.pdf" target="_blank" rel="noopener" aria-label="CV (PDF, opens in new tab)" title="CV"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></g></svg></a>
+      </div>
+    </div>
+    <div class="foot"><span>© 2026 Keya Shah · London<span id="clock"></span></span><a href="#top">Back to top ↑</a></div>
+  </div>
+</section>
+</main>
+
+<dialog class="modal" id="modal" aria-labelledby="m-title">
+  <div class="m-scroll">
+    <div class="m-top"><span class="mk" id="m-kicker"></span><button class="m-close" id="m-close" type="button">Close <span aria-hidden="true">✕</span></button></div>
+    <div class="m-body" id="m-body"></div>
+  </div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* Drop your photo at assets/keya.jpg and it appears in the About text automatically. */
+const PHOTO='assets/keya.jpg';
+const SVG={
+blog:`<svg viewBox="0 0 400 400" role="img" aria-label="Cover: I loved modern tech until I saw its limits" preserveAspectRatio="xMidYMid slice" style="padding:0;background:#002C78" font-family="Geist, system-ui, sans-serif"><rect width="400" height="400" fill="#002C78"/><text x="34" y="62" font-size="15" letter-spacing="2" fill="#F3E4C4" opacity=".8">Blog · 3 MIN READ</text><g font-size="44" font-weight="500" fill="#FFFAF1" letter-spacing="-1.5"><text x="32" y="210">I loved</text><text x="32" y="260">modern tech</text><text x="32" y="310">until I saw</text><text x="32" y="360"><tspan fill="#EACE00">its limits</tspan></text></g></svg>`,
+nabd:`<svg viewBox="0 0 720 230" role="img" aria-label="Diagram: an Arabic name is transliterated into several English spellings such as Yusuf, Youssef and Yusef, then converted back to Arabic, where it may not match the original. Features lost include short vowels, emphatic consonants and hamza placement." font-family="Geist, system-ui, sans-serif"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#686D7C"/></marker></defs><rect x="10" y="40" width="160" height="96" rx="16" fill="#EEF2FB" stroke="#9BAFDC"/><text x="90" y="98" text-anchor="middle" font-size="34" font-family="'Geeza Pro','Noto Naskh Arabic','Arial',sans-serif" fill="#20232B">يوسف</text><text x="90" y="64" text-anchor="middle" font-size="12" fill="#33457A" font-family="Geist Mono, monospace">ARABIC</text><path d="M178 88h70" stroke="#686D7C" stroke-width="1.6" marker-end="url(#ah)"/><text x="213" y="76" text-anchor="middle" font-size="12" fill="#686D7C">to Latin</text><rect x="258" y="28" width="204" height="120" rx="16" fill="#EDF6F2" stroke="#A9CFC2"/><text x="360" y="54" text-anchor="middle" font-size="12" fill="#2C5B4D" font-family="Geist Mono, monospace">ENGLISH</text><text x="360" y="84" text-anchor="middle" font-size="20" fill="#20232B">Yusuf</text><text x="360" y="110" text-anchor="middle" font-size="20" fill="#20232B">Youssef</text><text x="360" y="136" text-anchor="middle" font-size="20" fill="#20232B">Yusef</text><path d="M470 88h70" stroke="#686D7C" stroke-width="1.6" marker-end="url(#ah)"/><text x="505" y="76" text-anchor="middle" font-size="12" fill="#686D7C">back</text><rect x="550" y="40" width="160" height="96" rx="16" fill="#FCF0EA" stroke="#E8A889"/><text x="630" y="64" text-anchor="middle" font-size="12" fill="#8A3E1F" font-family="Geist Mono, monospace">ARABIC AGAIN</text><text x="630" y="104" text-anchor="middle" font-size="30" fill="#20232B">≠ ?</text><rect x="120" y="172" width="480" height="40" rx="20" fill="#fff" stroke="rgba(32,35,43,.15)"/><text x="360" y="197" text-anchor="middle" font-size="14" fill="#4A4F5C">Lost on the way: short vowels · emphatic consonants · hamza</text></svg>`,
+stories:`<svg viewBox="0 0 720 230" role="img" aria-label="Diagram: 179 social stories and a child profile go into four LLMs, which produce a personalised story that is scored with deterministic metrics." font-family="Geist, system-ui, sans-serif"><defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#686D7C"/></marker></defs><rect x="10" y="22" width="170" height="76" rx="14" fill="#EEF2FB" stroke="#9BAFDC"/><text x="95" y="56" text-anchor="middle" font-size="17" fill="#20232B">179 social stories</text><text x="95" y="78" text-anchor="middle" font-size="12" fill="#33457A">source texts</text><rect x="10" y="122" width="170" height="76" rx="14" fill="#EDF6F2" stroke="#A9CFC2"/><text x="95" y="156" text-anchor="middle" font-size="17" fill="#20232B">Child profile</text><text x="95" y="178" text-anchor="middle" font-size="12" fill="#2C5B4D">from clinical literature</text><path d="M186 60 C226 60 226 108 252 108M186 160 C226 160 226 116 252 116" fill="none" stroke="#686D7C" stroke-width="1.6" marker-end="url(#ah2)"/><rect x="258" y="72" width="140" height="80" rx="14" fill="#20232B"/><text x="328" y="108" text-anchor="middle" font-size="17" fill="#fff">4 LLMs</text><text x="328" y="130" text-anchor="middle" font-size="12" fill="#C9CEDA">GPT-4o, Qwen2 72B…</text><path d="M404 112h40" stroke="#686D7C" stroke-width="1.6" marker-end="url(#ah2)"/><rect x="450" y="72" width="120" height="80" rx="14" fill="#FCF0EA" stroke="#E8A889"/><text x="510" y="106" text-anchor="middle" font-size="15" fill="#20232B">Personalised</text><text x="510" y="126" text-anchor="middle" font-size="15" fill="#20232B">story</text><path d="M576 112h28" stroke="#686D7C" stroke-width="1.6" marker-end="url(#ah2)"/><rect x="610" y="62" width="100" height="100" rx="14" fill="#fff" stroke="rgba(32,35,43,.2)"/><text x="660" y="100" text-anchor="middle" font-size="14" fill="#20232B">Metrics</text><rect x="628" y="112" width="12" height="32" rx="3" fill="#A9CFC2"/><rect x="644" y="122" width="12" height="22" rx="3" fill="#9BAFDC"/><rect x="660" y="106" width="12" height="38" rx="3" fill="#A9CFC2"/><rect x="676" y="118" width="12" height="26" rx="3" fill="#E8A889"/></svg>`};
+
+const P={
+work:[
+ {id:'portal',file:"Learning Portal.app",title:'Key2Enable Learning Portal',sub:'Built for the We Read Lab at ZHO',desc:'Teacher and parent dashboards with AI-written progress reports in Arabic and English.',
+  thumb:{frame:'assets/portal-attendance.webp',url:'/teacher/attendance'},tint:'var(--peri-50)',kicker:'Shipped · Key2Enable',
+  lead:'A web platform for the We Read Lab at Zayed Higher Organization in Abu Dhabi, where students with disabilities learn to read. Teachers track attendance, lessons and assessments in one place, and parents get a monthly report in their own language.',
+  facts:[['Role','Design and full-stack development'],['For','We Read Lab, Zayed Higher Organization'],['Built with','React, Node.js, PostgreSQL, Google Cloud, OpenAI'],['Impact','Teacher prep and documentation time cut by over 40%']],
+  text:[['h','What it does'],['p','Teachers record attendance, plan lessons and log assessment scores for each student. Each user type has its own view and permissions, so teachers, parents and admins only see what is relevant to them.'],['p','At the end of each month, an AI agent turns the teacher\'s scores, lesson plans and short comments into a written progress report. Translation lets families read it in Arabic or English, and the same pipeline produces reports in Hindi and Spanish for other Key2Enable centres. Teachers can edit every report before it is sent. The platform also generates adaptive quizzes and computes scores.'],['p','I built it to WCAG 2.2 AA with ARIA patterns and tested it with screen readers and assistive keyboards.'],['h','Working in the lab'],['p','I also run sessions in the lab with students. Seeing how teachers actually record things during a lesson changed the attendance screen and the report flow more than once.']],
+  gallery:[{src:'assets/portal-landing.webp',alt:'Portal landing page in Arabic with the Key2Enable logo and a Get started button.',cap:'Landing page',wide:1},{src:'assets/portal-dashboard.webp',alt:'Teacher dashboard with a mood board and weekly attendance chart.',cap:'Teacher dashboard'},{src:'assets/portal-attendance.webp',alt:'Monthly attendance table in Arabic with present, absent and late marks per day.',cap:'Attendance, student names blurred'},{src:'assets/portal-reports.webp',alt:'Reports screen in Arabic with a teacher comment and an AI-generated report.',cap:'Generating a report, student details blurred'},{src:'assets/portal-report-en.webp',alt:'An English monthly progress report with assessment scores, lesson plans and teacher comments.',cap:'An AI-drafted report in English, names blurred'},{video:'assets/zho-lab.mp4',poster:'assets/zho-lab-poster.jpg',alt:'Keya leading a session at a smart board while a student matches pictures to words.',cap:'A session in the We Read Lab',wide:1}],
+  links:[]},
+ {id:'k2e',file:"key2enable.ae",title:'key2enable.ae',sub:'Company website',desc:'Designed and built the public website for Key2Enable.',
+  thumb:{frame:'assets/k2e-site-hero.webp',url:'key2enable.ae'},tint:'var(--sage-50)',kicker:'Shipped · Key2Enable',
+  lead:'Key2Enable makes assistive technology for schools and centres in several countries. I designed and built their website from scratch.',
+  facts:[['Role','Design and development'],['Built with','Next.js, TypeScript, Tailwind CSS, Framer Motion'],['Pages','Home, labs, solutions, get involved']],
+  text:[['p','The site introduces the company\'s labs and products, shows impact numbers and partners, and lets schools book a visit. I kept the motion light so it never gets in the way of reading or keyboard navigation.']],
+  gallery:[{src:'assets/k2e-site-hero.webp',alt:'Homepage hero with a student using assistive switches and the headline Every student deserves to learn.',cap:'Homepage',wide:1},{src:'assets/k2e-site-labs.webp',alt:'Labs section showing the We Read Lab in the UAE.',cap:'Labs section',wide:1}],
+  links:[['Visit key2enable.ae','https://www.key2enable.ae/']]},
+{id:'igem',file:'Revitalyze wiki',title:'NYU Abu Dhabi iGEM 2025 Wiki',sub:'Revitalyze · Gold Medal, Paris',desc:'The competition wiki for a probiotic therapy for a rare genetic disease.',
+  thumb:{frame:'assets/igem-home.webp',url:'2025.igem.wiki/nyu-abu-dhabi'},tint:'#E3F1EC',kicker:'Shipped · iGEM, NYU Abu Dhabi',
+  lead:'Revitalyze is the NYU Abu Dhabi iGEM team\'s 2025 project: a probiotic therapy for PMM2-CDG, the most common Congenital Disorder of Glycosylation, a rare disease with no commercially available treatment. I built the team\'s wiki, the main deliverable judges evaluate.',
+  facts:[['Role','Software and Wiki Developer'],['Built with','Next.js, data visualisations'],['Team','NYU Abu Dhabi iGEM 2025'],['Recognition','Gold Medal and Best Integrated Human Practices, iGEM 2025, Paris']],
+  text:[['p','The team engineered probiotic bacteria to produce the human PMM2 enzyme and package it into extracellular vesicles. Once ingested, the vesicles carry the enzyme into the bloodstream to restore glycosylation, one vesicle at a time.'],['p','The wiki explains all of this to judges and the public: the science, wet lab and dry lab results, the team\'s work with clinicians and CDG families, and their education outreach. I built the site and its data visualisations, and turned dense lab material into pages people could actually follow.']],
+  gallery:[{src:'assets/igem-home.webp',alt:'Revitalyze wiki homepage with the title over a splash of milk and a green gradient.',cap:'Homepage',wide:1},{src:'assets/igem-desc.webp',alt:'Project description page with a section index on the left and the abstract on the right.',cap:'Project description page',wide:1}],
+  links:[['Visit the wiki','https://2025.igem.wiki/nyu-abu-dhabi/']]},
+ {id:'echo',file:"ECHO.jpg",title:'ECHO',sub:'With the National MS Society UAE',desc:'An AI-assisted communication tool for people living with multiple sclerosis.',
+  thumb:{img:'assets/echo.webp'},tint:'var(--sage-50)',kicker:'Shipped · Side project',
+  lead:'ECHO is an AI-assisted communication tool. A person living with MS hands over a card with a QR code, and the other person, for example a pharmacist, scans it to get personalised guidance on how best to communicate with them.',
+  facts:[['Partner','National Multiple Sclerosis Society UAE'],['Recognition','Communication Award, Universal Design for Inclusion Program'],['Type','Product and service design']],
+  text:[['p','I designed ECHO with the National Multiple Sclerosis Society UAE as part of their Universal Design for Inclusion Program, where it won the Communication Award.']],
+  gallery:[{src:'assets/echo.webp',alt:'A pharmacist scans the QR code on an ECHO card with a phone.',cap:'Scanning an ECHO card',wide:1}],
+  links:[['Read the LinkedIn post','https://www.linkedin.com/feed/update/urn:li:ugcPost:7475068439473229825/'],['Watch my interview','https://www.instagram.com/reel/DZ4Q1vPtIQ6/']]},
+ {id:'moodcheck',file:"MoodCheck",title:'MoodCheck',sub:'Accessible student mood tracker',desc:'A daily mood check-in for students that works with assistive tech keyboards.',
+  thumb:{img:'assets/moodcheck.png'},kicker:'Shipped · Key2Enable',
+  lead:'MoodCheck is an accessible mood tracker for students. Each day, students pick how they feel from four big options (Sad, Tired, Happy or Excellent) using the assistive tech keyboard they already use in class.',
+  facts:[['Type','Accessible student mood tracker'],['Works with','Assistive tech keyboards'],['For','Key2Enable']],
+  text:[['p','The screen is kept simple: one question, the date, and four large choices. Each mood has its own colour, face and symbol, so students can tell them apart without relying on colour or reading alone.'],['p','Because it works with an assistive keyboard, students who don\'t use a mouse or touchscreen can still check in on their own.']],
+  gallery:[{src:'assets/moodcheck.png',alt:'MoodCheck screen with the title Today is, the date June 28, and four mood buttons: Sad, Tired, Happy and Excellent, each with an emoji face and a small symbol.',cap:'The daily check-in screen',wide:1}],
+  links:[]}
+],
+research:[
+ {id:'hri',file:"HRI '26.pdf",title:'Informing Robot Wellbeing Coach Design through Longitudinal Analysis of Human–AI Dialogue',short:'Robot wellbeing coach design',venue:'HRI Companion \'26',status:'Published',tint:'var(--sage-50)',tink:'var(--sage-ink)',kicker:'Researched · SMART Lab, NYU Abu Dhabi',
+  cover:'assets/hri-fig1.webp',
+  lead:'We analysed 4,352 messages that 38 university students exchanged with an LLM wellbeing coach over one week, and used what we found to suggest guidelines for designing robot wellbeing coaches.',
+  facts:[['Venue','ACM/IEEE HRI Companion 2026, Edinburgh'],['Authors','Keya Shah, Himanshi Lalwani, Zein Mukhanov, Hanan Salam'],['Method','Quantitative content analysis']],
+  text:[['p','We coded each conversation for user autonomy, agency, emotional disclosure, rumination, compliance and negotiation, and looked at how these changed over the week. The paper discusses how a coach can support users without taking over, and where it needs clear ethical boundaries.']],
+  gallery:[{src:'assets/hri-fig1.webp',alt:'System diagram: the user talks to an LLM wellbeing coach built on the OpenAI GPT API with SMART goal setting and ACT-informed reflections, which stores and retrieves messages and user profiles from a NoSQL database.',cap:'Figure 1. Overview of the wellbeing coach system',wide:1},{src:'assets/hri-fig2.webp',alt:'Heatmap of 38 participants against six interaction dimensions. Agency and autonomy show the most occurrences; rumination and negotiation the fewest.',cap:'Figure 2. How often each interaction dimension appeared, per participant'}],
+  links:[['arXiv','https://arxiv.org/abs/2602.04478'],['ACM DOI','https://doi.org/10.1145/3776734.3794409']]},
+ {id:'grow',file:"GROW.pdf",title:'GROW: A Conversational AI Coach for Goals, Reflection, Optimism, and Well-Being',short:'GROW',venue:'arXiv 2026',status:'Preprint',tint:'var(--peri-50)',tink:'var(--peri-ink)',kicker:'Researched · SMART Lab, NYU Abu Dhabi',
+  cover:'assets/grow-fig1.webp',
+  lead:'GROW is an LLM coach for university students. It combines SMART goal setting with ideas from Acceptance and Commitment Therapy to help students set goals that match their values and reflect on their progress.',
+  facts:[['Authors','Keya Shah, Himanshi Lalwani, Hanan Salam'],['My role','Design, full-stack build, deployment, user studies'],['Includes','Chat coach, dashboard, calendar check-ins, email reminders']],
+  text:[['p','I designed and built the full system: the conversational coach, the backend data pipeline and a multi-page dashboard for goals, values alignment and wellbeing tracking. I then ran a two-phase study with university students, combining interviews with usage data, and evaluated it with the PERMA Profiler and the System Usability Scale.']],
+  gallery:[{src:'assets/grow-fig1.webp',alt:'GROW system overview: a student moves from overwhelmed to supported through three parts: a conversational AI coach, workflow integration with their calendar, and a reflective dashboard.',cap:'Figure 1. How GROW supports students across goal setting, follow-through and reflection',wide:1},{src:'assets/grow-fig6.webp',alt:'Dashboard header showing the coaching phases Introduction, Goal Setting and Active Coaching, with progress cards for overall goal progress and check-in consistency.',cap:'Figure 6. The dashboard progress view'},{src:'assets/grow-fig9.webp',alt:'Conversation insights tab with key themes, communication style, and a radar chart of values alignment.',cap:'Figure 9. Conversation insights and values alignment'}],
+  links:[['arXiv','https://arxiv.org/abs/2604.04548']]},
+ {id:'nabd',file:"Between Scripts.pdf",title:'Mapping What Gets Lost Between Scripts',short:'Arabic ↔ English transliteration',venue:'Arabic NLP',status:'In progress',tint:'var(--peach-50)',tink:'var(--peach-ink)',kicker:'Researched · Arabic NLP',
+  svg:'nabd',
+  lead:'When a name is transliterated from Arabic to English and back again, it often doesn\'t return to its original form. This project studies exactly what is lost in that round trip, and at which step.',
+  facts:[['Focus','Personal names in Modern Standard Arabic'],['Approach','Reversible transliteration scheme and error analysis'],['Status','In progress']],
+  text:[['p','Arabic script usually leaves out short vowels, and several Arabic letters map to the same English letter, so names like Yusuf, Youssef and Yusef can all come back differently. We are building a transliteration scheme that gives every Arabic grapheme its own Latin token, then running names through a round trip to see which features, such as vowel quality, emphatic consonants or hamza placement, fail to survive.']],
+  gallery:[{svg:'nabd',cap:'The round trip we study (illustration)',wide:1}],
+  links:[['Read the paper (PDF)','assets/Nabd-paper.pdf']]},
+ {id:'stories',file:"Social Stories.pdf",title:'Can LLMs personalise social stories for autistic children?',short:'Social stories benchmark',venue:'Benchmark',status:'Ongoing',tint:'var(--surface)',tink:'var(--ink-2)',kicker:'Researched · SMART Lab, NYU Abu Dhabi',
+  svg:'stories',
+  lead:'A benchmark that tests whether LLMs can adapt social stories to a specific child without losing what the story is meant to teach.',
+  facts:[['Data','179 social stories, child profiles based on clinical literature'],['Models','Four LLMs, including GPT-4o and Qwen2 72B'],['Status','Ongoing']],
+  text:[['p','We test full personalisation, how sensitive models are to individual profile details, and how well they adapt stories for six different countries. We use only deterministic metrics, with no LLM-as-judge scoring.']],
+  gallery:[{svg:'stories',cap:'Benchmark setup (illustration)',wide:1}],
+  links:[]}
+],
+play:[
+ {id:'consent',file:"Consent.mp4",title:'Consent Not Guaranteed',sub:'Ars Electronica 2025',desc:'A robotic hand installation shown at Ars Electronica in Linz.',
+  thumb:{img:'assets/consent.webp',pos:'50% 30%'},tint:'#F1F1F1',kicker:'Tinkered · Installation',
+  lead:'A robotic hand inspired by Philon of Byzantium\'s automatic servant, an early automaton. Instead of serving when asked, our hand sometimes hesitates or refuses.',
+  facts:[['Exhibited','Ars Electronica Festival 2025, Linz'],['Team','Keya Shah, Elora Trotter, Marcos Hernández, Clara Juong'],['Built with','Servos, sensors, microcontroller']],
+  text:[['p','The piece asks what consent means for machines built to serve, and what changes when a helper can say no.']],
+  gallery:[{src:'assets/consent.webp',alt:'A black servo-driven robotic hand on a coiled column, draped with wooden beads.',cap:'The installation',wide:1}],
+  links:[['View on Ars Electronica','https://ars.electronica.art/panic/en/view/consent-not-guaranteed-21738ddb450c81f0a4e5c0bab727c5f1/']]},
+ {id:'twister',file:"Twisted Twister.mp4",title:'Twisted Twister!',sub:'Finger physiotherapy game',desc:'Twister made small and played with your fingers, as a physiotherapy exercise.',
+  thumb:{img:'assets/twister.webp'},tint:'#fff',kicker:'Tinkered · Physical computing',
+  lead:'A finger-sized version of Twister designed to make physiotherapy exercises for the hand more fun. The game calls out which finger goes on which colour, and sensors check that you did it.',
+  facts:[['Course','Introduction to Interactive Media, NYU Abu Dhabi, Fall 2023'],['Built with','Arduino, force and ultrasonic sensors, p5.js'],['Type','Solo game']],
+  text:[['p','Force sensors sit under each coloured circle on an acrylic board. A p5.js screen spins the wheel, tracks the score and decides when you win or lose. Because your hand is busy on the board, you can spin hands-free.']],
+  gallery:[{src:'assets/twister.webp',alt:'Twisted Twister title screen with coloured circles and a Play button.',cap:'Start screen',wide:1}],
+  links:[['Watch the demo','https://www.youtube.com/watch?v=AEBiwOjcJpo']]},
+ {id:'crysterrical',file:"Crysterrical.jpg",title:'Crysterrical',sub:'Desert Media Art, NYU Abu Dhabi',desc:'Light sculptures installed in the desert outside Abu Dhabi.',
+  thumb:{img:'assets/crysterrical.webp'},tint:'#F3E9E2',kicker:'Tinkered · Installation',
+  lead:'Three tall white sculptures made of stacked arches, lit from the inside and installed on the dunes at sunset.',
+  facts:[['Course','Desert Media Art, NYU Abu Dhabi'],['Site','Desert near Abu Dhabi']],
+  text:[],
+  gallery:[{src:'assets/crysterrical.webp',alt:'Three white towers of stacked arches standing on sand dunes at sunset.',cap:'Installed at sunset',wide:1}],
+  links:[['Project page','https://desert.nyuadim.com/crysterrical/']]},
+ {id:'plantwise',file:"Plantwise.app",title:'Plantwise',sub:'Web app',desc:'A community site for finding and reviewing plant-based products.',
+  thumb:{img:'assets/plantwise-logo.webp',contain:1},tint:'#1d4b0b',kicker:'Tinkered · Web app',
+  lead:'A full-stack web app where people can browse plant-based and sustainable products, save favourites and post reviews.',
+  facts:[['Built with','React, Express, MongoDB, Passport'],['Features','Accounts, posts, favourites, reviews']],
+  text:[],gallery:[],links:[['View on GitHub','https://github.com/keys19/plantwise']]},
+ {id:'journo',file:"Journo.app",title:'Journo',sub:'Mindfulness iOS app',desc:'A mindfulness app with journaling, relaxation and creative exercises.',
+  thumb:{img:'assets/journo.png'},kicker:'Tinkered · iOS app',
+  lead:'Journo is a mindfulness app for iPhone. It brings together four small exercises to help you slow down, notice how you feel and let go of what is weighing on you.',
+  facts:[['Platform','iOS'],['Type','Mindfulness app']],
+  text:[['h','What\'s inside'],['p','Journaling prompts: questions that help you reflect on gratitude, challenges and growth.'],['p','Restless body relaxing: exercises that combine body awareness and relaxation to ease stress and physical tension.'],['p','Mandala art: make a mandala based on your mood and relax through drawing.'],['p','Chest of thoughts: a place to write down worries and "lock them away" for a while, like a mental declutter.']],
+  gallery:[{src:'assets/journo.png',alt:'Slide showing the Journo app icon on an iPhone home screen, next to its four features: Journaling Prompts, Restless Body Relaxing, Mandala Art and Chest of Thoughts.',cap:'Journo and its four features',wide:1}],
+  links:[]},
+ {id:'blog',file:"Blog",title:'I loved modern tech until I saw its limits',sub:'Blog on Medium',desc:'What helping an 80-year-old former professor with her iPhone taught me about accessibility.',
+  svg:'blog',kicker:'Written · Medium',
+  lead:'A short blog post about sitting down with an 80-year-old former professor who struggled to send an email from her iPhone, and what that showed me about how tech treats accessibility.',
+  facts:[['Published','Medium, 12 March 2025'],['Length','3 minute read'],['Topics','Accessibility, UI design']],
+  text:[['p','She had used computers for decades, but found the default blue text in iMessage hard to read, and getting to the accessibility settings felt like a puzzle. We tried Siri and the newest AI features together, and none of them helped her make her phone easier to use on her own.'],['p','The Blog argues that accessibility is too often treated as a bonus, buried in settings or added late, and that good accessible design ends up helping everyone. Writing it is where I stopped thinking of good design as mostly about how things look.']],
+  gallery:[],
+  links:[['Read on Medium','https://medium.com/@keya19shah_48385/i-loved-modern-tech-until-i-saw-its-limits-a3b92a269015']]}
+]};
+
+const META={portal:['Web platform','assets/portal-attendance.webp'],k2e:['Website','assets/k2e-site-hero.webp'],igem:['Wiki','assets/igem-home.webp'],echo:['Product','assets/echo.webp'],moodcheck:['Web app','assets/moodcheck.png'],
+  hri:["Paper · HRI '26",'assets/hri-fig1.webp',1],grow:['Paper','assets/grow-fig1.webp',1],nabd:['Research',null],stories:['Research',null],
+  consent:['Installation','assets/consent.webp'],twister:['Game','assets/twister.webp'],crysterrical:['Installation','assets/crysterrical.webp'],plantwise:['Web app','assets/plantwise-logo.webp'],journo:['iOS app','assets/journo.png',0,'40% 50%'],blog:['Blog',null]};
+const SHORT={blog:'I loved modern tech until I saw its limits',hri:'Designing robot wellbeing coaches',grow:'GROW: an AI wellbeing coach',nabd:'What gets lost between scripts',stories:'Personalised social stories',portal:'Key2Enable Learning Portal',igem:'iGEM 2025 wiki: Revitalyze'};
+
+(function(){
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  const root=document.documentElement;
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const all={},cat={};Object.entries(P).forEach(([c,l])=>l.forEach(p=>{all[p.id]=p;cat[p.id]=c}));
+  const order=[...P.work,...P.research,...P.play].map(p=>p.id);
+  const arrow='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  // ---- sliding pill indicator (nav + filter bar)
+  function place(ind,el){if(!ind)return;if(!el){ind.style.opacity=0;return}
+    ind.style.width=el.offsetWidth+'px';ind.style.height=el.offsetHeight+'px';
+    ind.style.transform=`translate(${el.offsetLeft}px,${el.offsetTop}px)`;ind.style.opacity=1;
+    if(!ind.classList.contains('ready'))requestAnimationFrame(()=>requestAnimationFrame(()=>ind.classList.add('ready')))}
+
+  // ---- grid
+  ['work','research','play'].forEach(c=>{const g=document.querySelector(`[data-g="${c}"]`);const cols=c==='play'?4:2;
+    g.innerHTML=P[c].map((p,i)=>{const id=p.id,m=META[id];
+      const media=m[1]?`<img src="${m[1]}" alt="" loading="lazy" decoding="async"${m[3]?` style="object-position:${m[3]}"`:''}>`:SVG[p.svg].replace(/role="img" aria-label="[^"]*"/,'aria-hidden="true"').replace(/id="(ah2?)"/g,'id="$1g"').replace(/url\(#(ah2?)\)/g,'url(#$1g)');
+      const sub=c==='research'?(p.facts.find(f=>f[0]==='Authors')||['',p.venue||''])[1]:(p.desc||'');
+      return `<li class="tile rv" style="--d:${(i%cols)*90}ms"><button type="button" data-open="${id}"><div class="img ${m[2]||c==='research'?'contain':''}">${media}<span class="go" aria-hidden="true">${arrow}</span></div><div class="cap"><span class="kind">${esc(m[0])}</span><b>${esc(SHORT[id]||p.title)}</b><span class="sub">${esc(sub)}</span>${p.badge?`<span class="chip">${esc(p.badge)}</span>`:''}</div></button></li>`}).join('')});
+  document.querySelectorAll('.tile .img img').forEach(img=>{const on=()=>img.classList.add('ld');if(img.complete&&img.naturalWidth)on();else{img.addEventListener('load',on,{once:true});img.addEventListener('error',on,{once:true})}});
+
+  // ---- carousels: native scroll + snap, with buttons and a counter
+  const cars=[...document.querySelectorAll('[data-grp]')].map(g=>{const track=g.querySelector('.grid'),ctl=g.querySelector('.car-ctl'),count=g.querySelector('.car-count'),btns=[...g.querySelectorAll('.car-btn')];
+    const items=()=>[...track.children];
+    const step=()=>{const it=items();if(it.length<2)return track.clientWidth;return it[1].offsetLeft-it[0].offsetLeft};
+    function update(){const it=items(),n=it.length;if(!n||g.hidden)return;const st=step(),per=Math.max(1,Math.round((track.clientWidth+2)/st));
+      const fits=track.scrollWidth<=track.clientWidth+4;ctl.hidden=fits;if(fits)return;
+      const first=Math.min(n-per,Math.round(track.scrollLeft/st))+1,last=Math.min(n,first+per-1);
+      count.textContent=(first===last?first:first+'–'+last)+' of '+n;
+      const max=track.scrollWidth-track.clientWidth-2;
+      btns[0].setAttribute('aria-disabled',track.scrollLeft<=2);btns[1].setAttribute('aria-disabled',track.scrollLeft>=max)}
+    btns.forEach(b=>b.addEventListener('click',()=>{if(b.getAttribute('aria-disabled')==='true')return;const per=Math.max(1,Math.floor((track.clientWidth+2)/step()));
+      track.scrollBy({left:+b.dataset.dir*per*step(),behavior:reduce?'auto':'smooth'})}));
+    let t=0;track.addEventListener('scroll',()=>{if(!t)t=requestAnimationFrame(()=>{t=0;update()})},{passive:true});
+    return update});
+  const updateCars=()=>cars.forEach(f=>f());
+  addEventListener('resize',updateCars);updateCars();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(updateCars);
+
+  // ---- filter bar
+  const cbs=[...document.querySelectorAll('.cb')],grps=[...document.querySelectorAll('[data-grp]')],cbLive=document.getElementById('cbLive');
+  const cbInd=document.getElementById('cbInd'),groupsEl=document.getElementById('groups');
+  const pressed=()=>cbs.find(b=>b.getAttribute('aria-pressed')==='true');
+  function applyFilter(v,b){let first=true,n=0;
+    groupsEl.classList.toggle('single',v!=='all');
+    grps.forEach(g=>{if(v==='all')g.setAttribute('aria-roledescription','carousel');else g.removeAttribute('aria-roledescription');g.querySelector('.grid').scrollLeft=0});
+    grps.forEach(g=>{const on=v==='all'||g.dataset.grp===v;g.hidden=!on;g.classList.toggle('first',on&&first);
+      if(on){first=false;g.querySelectorAll('.tile').forEach(t=>{t.classList.add('in','settled');if(!reduce){t.classList.remove('swap');void t.offsetWidth;t.style.setProperty('--sd',Math.min(n++,8)*55+'ms');t.classList.add('swap')}})}});
+    cbLive.textContent=v==='all'?'Showing all projects':'Showing '+b.textContent;updateCars()}
+  cbs.forEach(b=>b.onclick=()=>{if(b.getAttribute('aria-pressed')==='true')return;const v=b.dataset.show;
+    cbs.forEach(x=>x.setAttribute('aria-pressed',x===b));place(cbInd,b);
+    if(reduce){applyFilter(v,b);return}
+    groupsEl.classList.add('out');clearTimeout(applyFilter.t);
+    applyFilter.t=setTimeout(()=>{applyFilter(v,b);groupsEl.classList.remove('out')},220)});
+
+  // ---- modal
+  const modal=document.getElementById('modal'),mb=document.getElementById('m-body'),mk=document.getElementById('m-kicker'),msc=modal.querySelector('.m-scroll');
+  const label=id=>SHORT[id]||all[id].title;
+  function render(id){const p=all[id];mk.textContent=({work:'Products in use',research:'Research',play:'Side & fun projects'})[cat[id]];
+    let h=`<h2 id="m-title" tabindex="-1">${esc(p.title)}</h2><p class="m-lead">${esc(p.lead)}</p><dl class="m-facts">${p.facts.map(f=>`<div><dt>${esc(f[0])}</dt><dd>${esc(f[1])}</dd></div>`).join('')}</dl>`;
+    if(p.text&&p.text.length)h+=`<div class="m-text">${p.text.map(t=>t[0]==='h'?`<h3>${esc(t[1])}</h3>`:`<p>${esc(t[1])}</p>`).join('')}</div>`;
+    if(p.links&&p.links.length)h+=`<div class="m-links">${p.links.map((l,i)=>`<a class="btn ${i?'ghost':''}" href="${l[1]}" target="_blank" rel="noopener">${esc(l[0])} <span class="arr" aria-hidden="true">↗</span><span class="sr-only"> (opens in new tab)</span></a>`).join('')}</div>`;
+    if(p.gallery&&p.gallery.length)h+=`<div class="m-gallery">${p.gallery.map(g=>`<figure class="${g.wide?'wide':''}"><div class="box">${g.svg?SVG[g.svg]:g.video?`<video src="${g.video}" poster="${g.poster}" controls muted playsinline preload="metadata" aria-label="${esc(g.alt)}"></video>`:`<img src="${g.src}" alt="${esc(g.alt)}" loading="lazy" decoding="async">`}</div><figcaption>${esc(g.cap)}</figcaption></figure>`).join('')}</div>`;
+    const k=order.indexOf(id),prev=order[(k-1+order.length)%order.length],next=order[(k+1)%order.length];
+    h+=`<nav class="m-nav" aria-label="More projects"><button type="button" data-goto="${prev}"><small><span class="a" aria-hidden="true">←</span> Previous</small><b>${esc(label(prev))}</b></button><button type="button" data-goto="${next}"><small>Next <span class="a" aria-hidden="true">→</span></small><b>${esc(label(next))}</b></button></nav>`;
+    mb.innerHTML=h;
+    [...mb.children].forEach((el,i)=>el.style.setProperty('--i',Math.min(i,6)));
+    mb.querySelectorAll('.m-gallery figure').forEach((f,i)=>f.style.setProperty('--i',Math.min(i,4)+5));
+    msc.scrollTop=0}
+  function openModal(id){render(id);modal.classList.remove('closing');modal.showModal();root.classList.add('locked')}
+  function closeModal(){if(!modal.open||modal.classList.contains('closing'))return;
+    if(reduce){modal.close();return}
+    modal.classList.add('closing');
+    const done=e=>{if(e&&e.target!==modal)return;modal.removeEventListener('animationend',done);clearTimeout(t);modal.classList.remove('closing');modal.close()};
+    const t=setTimeout(done,450);modal.addEventListener('animationend',done)}
+  function goTo(id){mb.querySelectorAll('video').forEach(v=>v.pause());
+    if(reduce){render(id);mb.querySelector('h2').focus();return}
+    mb.classList.add('out');setTimeout(()=>{render(id);mb.classList.remove('out');mb.querySelector('h2').focus({preventScroll:true})},220)}
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-open]');if(b)openModal(b.dataset.open);const g=e.target.closest('[data-goto]');if(g)goTo(g.dataset.goto)});
+  document.getElementById('m-close').onclick=closeModal;
+  modal.addEventListener('cancel',e=>{e.preventDefault();closeModal()});
+  modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+  modal.addEventListener('close',()=>{root.classList.remove('locked');mb.querySelectorAll('video').forEach(v=>v.pause())});
+
+  // ---- theme toggle (remembers choice, circular reveal where supported)
+  const tb=document.getElementById('theme');
+  function setTheme(t){root.dataset.theme=t;tb.setAttribute('aria-pressed',t==='dark');try{localStorage.setItem('theme',t)}catch(e){}}
+  let saved=null;try{saved=localStorage.getItem('theme')}catch(e){}
+  setTheme(saved||'light');
+  tb.onclick=()=>{const next=root.dataset.theme==='dark'?'light':'dark';
+    if(reduce||!document.startViewTransition){setTheme(next);return}
+    const r=tb.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,end=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+    const vt=document.startViewTransition(()=>setTheme(next));
+    vt.ready.then(()=>root.animate({clipPath:[`circle(0px at ${x}px ${y}px)`,`circle(${end}px at ${x}px ${y}px)`]},{duration:700,easing:'cubic-bezier(.65,0,.35,1)',pseudoElement:'::view-transition-new(root)'})).catch(()=>{})};
+
+  // ---- mobile menu
+  const mbtn=document.getElementById('menuBtn'),links=document.getElementById('links');
+  links.querySelectorAll('li').forEach((li,i)=>li.style.setProperty('--i',i));
+  const mbt=mbtn.querySelector('.mb-t'),navEl=document.getElementById('nav');
+  mbtn.onclick=()=>{const o=mbtn.getAttribute('aria-expanded')==='true';mbtn.setAttribute('aria-expanded',!o);links.classList.toggle('open',!o);navEl.classList.toggle('menu-open',!o);navEl.classList.remove('hide');mbt.textContent=o?'Menu':'Close';if(!o)links.querySelector('a').focus()};
+  document.addEventListener('click',e=>{if(links.classList.contains('open')&&!navEl.contains(e.target))mbtn.click()});
+  links.addEventListener('click',e=>{if(e.target.closest('a')&&links.classList.contains('open'))mbtn.click()});
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&links.classList.contains('open')){mbtn.click();mbtn.focus()}});
+
+  // ---- scroll spy + nav indicator (follows hover, returns to active)
+  const nav=document.getElementById('nav'),navInd=document.getElementById('navInd');
+  const spyLinks=[...document.querySelectorAll('[data-spy]')];
+  const secs=spyLinks.map(a=>document.getElementById(a.dataset.spy));
+  let hovering=null;
+  const activeLink=()=>spyLinks.find(a=>a.getAttribute('aria-current')==='true');
+  function spy(){const y=innerHeight*.4;let cur=secs[0];secs.forEach(s=>{if(s.getBoundingClientRect().top<=y)cur=s});
+    let changed=false;spyLinks.forEach(a=>{const v=a.dataset.spy===cur.id?'true':'false';if(a.getAttribute('aria-current')!==v){a.setAttribute('aria-current',v);changed=true}});
+    if(changed&&!hovering)place(navInd,activeLink())}
+  if(fine){spyLinks.forEach(a=>a.addEventListener('pointerenter',()=>{hovering=a;place(navInd,a)}));
+    links.addEventListener('pointerleave',()=>{hovering=null;place(navInd,activeLink())})}
+
+  // ---- about text: words (and photo pills) light up as you scroll
+  const at=document.getElementById('aboutText');
+  (function split(){const walk=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(w=>{if(!w)return;if(/^\s+$/.test(w))f.appendChild(document.createTextNode(w));else{const s=document.createElement('span');s.className='w';s.textContent=w;f.appendChild(s)}});n.replaceChild(f,c)}})};walk(at)})();
+  // keep a photo and the punctuation right after it on the same line
+  at.querySelectorAll('.pill').forEach(p=>{const n=p.nextSibling;if(n&&n.nodeType===1&&n.classList.contains('w')&&/^[,.;:!?]/.test(n.textContent)){const g=document.createElement('span');g.style.whiteSpace='nowrap';p.before(g);g.append(p,n)}});
+  const words=[...at.querySelectorAll('.w, .pill')];
+  function light(){if(reduce){words.forEach(w=>w.classList.add('lit'));return}const r=at.getBoundingClientRect();const p=Math.max(0,Math.min(1,(innerHeight*.85-r.top)/(r.height+innerHeight*.35)));const n=Math.round(p*words.length);words.forEach((w,i)=>w.classList.toggle('lit',i<n))}
+
+  // ---- reveal on scroll
+  document.querySelectorAll('.rows li').forEach((li,i,a)=>{li.classList.add('rv');li.style.setProperty('--d',(i%8)*45+'ms')});
+  const settle=e=>{if(e.propertyName==='opacity'){e.currentTarget.classList.add('settled');e.currentTarget.removeEventListener('transitionend',settle)}};
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.addEventListener('transitionend',settle);e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.rv').forEach(el=>reduce?el.classList.add('in','settled'):io.observe(el));
+
+
+  // ---- London local time in the footer
+  const clock=document.getElementById('clock');
+  function tickClock(){try{clock.textContent=' · '+new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/London'}).format(new Date())+' local time'}catch(e){}}
+  tickClock();setInterval(tickClock,30000);
+
+  // ---- magnetic buttons
+  if(fine&&!reduce)document.querySelectorAll('[data-mag]').forEach(el=>{
+    el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.translate=`${((e.clientX-r.left)/r.width-.5)*r.width*.18}px ${((e.clientY-r.top)/r.height-.5)*r.height*.35}px`});
+    el.addEventListener('pointerleave',()=>{el.style.translate='0 0'})});
+
+  // ---- scroll-driven: arcs, progress, hero parallax, nav hide/show
+  const darks=[...document.querySelectorAll('.dark')],prog=document.getElementById('prog'),heroIn=document.querySelector('.hero .wrap');
+  let lastY=scrollY,ticking=false;
+  function arcs(){if(reduce){darks.forEach(d=>d.style.setProperty('--k',1));return}darks.forEach(d=>{const r=d.getBoundingClientRect();const k=Math.max(0,Math.min(1,(innerHeight-r.top)/(innerHeight*.9)));d.style.setProperty('--k',k.toFixed(3))})}
+  function frame(){ticking=false;const y=scrollY;
+    spy();light();arcs();
+    const max=document.documentElement.scrollHeight-innerHeight;prog.style.setProperty('--p',max>0?(y/max).toFixed(4):0);
+    if(!reduce&&y<innerHeight*1.2){heroIn.style.transform=`translate3d(0,${(y*.22).toFixed(1)}px,0)`;heroIn.style.opacity=Math.max(0,1-y/(innerHeight*.85)).toFixed(3)}
+    nav.classList.toggle('scrolled',y>24);
+    const menuOpen=links.classList.contains('open'),focusIn=nav.contains(document.activeElement);
+    if(!reduce&&!menuOpen&&!focusIn&&y>lastY+4&&y>240)nav.classList.add('hide');
+    else if(y<lastY-4||y<240||focusIn)nav.classList.remove('hide');
+    lastY=y}
+  addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(frame)}},{passive:true});
+  nav.addEventListener('focusin',()=>nav.classList.remove('hide'));
+  addEventListener('resize',()=>{arcs();place(navInd,hovering||activeLink());place(cbInd,pressed())});
+  spy();frame();
+  const initInd=()=>{place(navInd,activeLink());place(cbInd,pressed())};
+  initInd();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(initInd);
+
+  // ---- copy + photo
+  const toast=document.getElementById('toast');function flash(t){toast.textContent=t;toast.classList.add('show');clearTimeout(flash.t);flash.t=setTimeout(()=>toast.classList.remove('show'),2200)}
+  document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText(b.dataset.copy);flash('Email copied');b.classList.add('done');clearTimeout(b.t);b.t=setTimeout(()=>b.classList.remove('done'),1800)}catch(e){flash(b.dataset.copy)}});
+  const im=new Image();im.onload=()=>document.querySelectorAll('[data-photo]').forEach(el=>{el.innerHTML=`<img src="${PHOTO}" alt="">`;el.classList.remove('ks');el.classList.add('me')});im.src=PHOTO;
+
+})();
+</script>
 </body>
-
 </html>
+
 
 
 
