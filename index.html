@@ -16,7 +16,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Keya Shah, accessibility designer and engineer. Headline: I design things that work for everyone.">
-<meta property="og:title" content="Keya Shah · Accessibility designer and engineer">
+<meta property="og:title" content="Keya Shah">
 <meta property="og:description" content="Digital accessibility, inclusive design and assistive technology. HCI research and full-stack development.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://keys19.github.io/portfolio/assets/og-image.png">
@@ -154,8 +154,13 @@ p{margin:0;text-wrap:pretty}
 #about{transform:translateY(calc((1 - var(--k)) * 60px));transition:none}
 .dark>*{position:relative;z-index:1}
 #about{border-radius:0}
-#about::after{content:"";position:absolute;left:0;right:0;bottom:-90px;height:180px;background:inherit;border-radius:0 0 50% 50% / 0 0 30% 30%;pointer-events:none}
+#about{--e:0}
+/* bottom arc: mirrors the top arc, growing wider and deeper as the section scrolls out (--e goes 0 to 1) */
+#about::after{content:"";position:absolute;left:calc(var(--e) * -10%);right:calc(var(--e) * -10%);bottom:calc(-90px - var(--e) * 70px);height:calc(180px + var(--e) * 140px);background:inherit;border-radius:0 0 50% 50% / 0 0 calc(30% + var(--e) * 70%) calc(30% + var(--e) * 70%);pointer-events:none}
+#about .about-text{transform:translateY(calc(var(--e) * -40px));opacity:calc(1 - var(--e) * .35)}
 #about + .sec{padding-top:calc(clamp(80px,10vw,140px) + 60px)}
+/* the work section fades and rises in as About scrolls away (mirror of the hero fading out). --w goes 0 to 1; visual only, screen readers are unaffected */
+#work>.wrap{opacity:calc(.12 + var(--w,1) * .88);transform:translateY(calc((1 - var(--w,1)) * 48px))}
 .center{text-align:center}
 .about-text{max-width:1180px;margin:28px auto 0;font-size:clamp(26px,3.6vw,56px);font-weight:400;line-height:1.16;letter-spacing:-.03em;text-align:center}
 .about-text .w{color:var(--dark-dim);transition:color .6s var(--ease)}
@@ -420,7 +425,7 @@ dialog.modal::backdrop{background:rgba(10,10,12,.62);backdrop-filter:blur(8px);-
   .m-gallery{grid-template-columns:1fr}
   .rows li{grid-template-columns:1fr}
   .dark::before{top:-40px;height:80px}
-  #about::after{bottom:-40px;height:80px}
+  #about::after{bottom:calc(-40px - var(--e) * 30px);height:calc(80px + var(--e) * 60px)}
   #about + .sec{padding-top:110px}
   .dark{padding:84px 0 72px}
   #about{transform:none}
@@ -779,6 +784,7 @@ const SHORT={crysterrical:'Cryst[ERR]ical',blog:'I loved modern tech until I saw
     let t=0;track.addEventListener('scroll',()=>{if(!t)t=requestAnimationFrame(()=>{t=0;update()})},{passive:true});
     return update});
   const updateCars=()=>cars.forEach(f=>f());
+  document.getElementById('work').addEventListener('focusin',()=>document.getElementById('work').style.setProperty('--w',1));
   addEventListener('resize',updateCars);updateCars();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(updateCars);
 
   // ---- filter bar
@@ -891,7 +897,7 @@ const SHORT={crysterrical:'Cryst[ERR]ical',blog:'I loved modern tech until I saw
   // ---- scroll-driven: arcs, progress, hero parallax, nav hide/show
   const darks=[...document.querySelectorAll('.dark')],prog=document.getElementById('prog'),heroIn=document.querySelector('.hero .wrap');
   let lastY=scrollY,ticking=false;
-  function arcs(){if(reduce){darks.forEach(d=>d.style.setProperty('--k',1));return}darks.forEach(d=>{const r=d.getBoundingClientRect();const k=Math.max(0,Math.min(1,(innerHeight-r.top)/(innerHeight*.9)));d.style.setProperty('--k',k.toFixed(3))})}
+  function arcs(){if(reduce){darks.forEach(d=>d.style.setProperty('--k',1));return}darks.forEach(d=>{const r=d.getBoundingClientRect();const k=Math.max(0,Math.min(1,(innerHeight-r.top)/(innerHeight*.9)));d.style.setProperty('--k',k.toFixed(3))});const ab=document.getElementById('about').getBoundingClientRect();const e=Math.max(0,Math.min(1,(innerHeight*.75-ab.bottom)/(innerHeight*.7)));document.getElementById('about').style.setProperty('--e',e.toFixed(3));const w=Math.min(1,e/.85);document.getElementById('work').style.setProperty('--w',(1-Math.pow(1-w,2)).toFixed(3))}
   function frame(){ticking=false;const y=scrollY;
     spy();light();arcs();
     const max=document.documentElement.scrollHeight-innerHeight;prog.style.setProperty('--p',max>0?(y/max).toFixed(4):0);
