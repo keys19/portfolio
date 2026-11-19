@@ -5,7 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>try{if(localStorage.getItem("theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 <title>Keya Shah</title>
-<meta name="description" content="Keya Shah designs and builds accessible technology: assistive tech at Key2Enable, HCI research, and an MSc in Disability, Design and Innovation at UCL.">
+<meta name="description" content="Keya Shah is an accessibility designer and engineer in London working on digital accessibility (WCAG 2.2, screen reader testing), inclusive design, assistive technology, HCI research and full-stack development with React, Next.js and Node.js.">
+<meta name="author" content="Keya Shah">
+<!-- Site address: when you move to your own domain, replace https://keys19.github.io/portfolio/ here, in the og/twitter tags, in the JSON-LD block and in sitemap.xml -->
+<link rel="canonical" href="https://keys19.github.io/portfolio/">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://keys19.github.io/portfolio/">
+<meta property="og:site_name" content="Keya Shah">
+<meta property="og:image" content="https://keys19.github.io/portfolio/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Keya Shah, accessibility designer and engineer. Headline: I design things that work for everyone.">
+<meta property="og:title" content="Keya Shah · Accessibility designer and engineer">
+<meta property="og:description" content="Digital accessibility, inclusive design and assistive technology. HCI research and full-stack development.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://keys19.github.io/portfolio/assets/og-image.png">
+<meta name="twitter:image:alt" content="Keya Shah, accessibility designer and engineer. Headline: I design things that work for everyone.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Keya Shah","url":"https://keys19.github.io/portfolio/","image":"https://keys19.github.io/portfolio/assets/keya.jpg","jobTitle":"Accessibility designer and engineer",
+"description":"Accessibility designer and engineer working on digital accessibility, inclusive design and assistive technology.",
+"address":{"@type":"PostalAddress","addressLocality":"London","addressCountry":"GB"},
+"affiliation":{"@type":"CollegeOrUniversity","name":"University College London"},
+"alumniOf":{"@type":"CollegeOrUniversity","name":"New York University Abu Dhabi"},
+"sameAs":["https://www.linkedin.com/in/keya-t-shah/","https://github.com/keys19","https://medium.com/@keya19shah_48385"],
+"knowsAbout":["Digital accessibility","Web accessibility","WCAG 2.2","Accessibility audits","Screen reader testing","VoiceOver","NVDA","TalkBack","ARIA","Keyboard accessibility","Accessible design systems","Inclusive design","Assistive technology","Human-computer interaction","Human-robot interaction","User research","Usability testing","Co-design","Interaction design","Systems design","Prototyping","Figma","React","Next.js","TypeScript","JavaScript","Node.js","PostgreSQL","Python","Swift","iOS development","LLM agents","Conversational interfaces","Arduino","Physical computing","Creative coding"]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap" rel="stylesheet">
@@ -94,7 +118,7 @@ p{margin:0;text-wrap:pretty}
 .btn .arr{display:inline-block;transition:transform .45s var(--ease)}
 @media (hover:hover){.btn:hover .arr{transform:translate(2px,-2px)}}
 .btn.ghost{background:transparent;color:var(--ink);--fill:var(--ink);--fill-ink:var(--bg)}
-@media (hover:hover){.btn.ghost:hover{border-color:var(--ink)}}
+@media (hover:hover){.btn.ghost:hover{color:var(--fill-ink);border-color:var(--ink)}}
 [data-theme="dark"] .btn{--fill-ink:#111}
 .menu-btn{display:none;align-items:center;gap:10px;height:44px;padding:0 16px 0 14px;border:1.5px solid var(--line);border-radius:999px;background:var(--card);font-size:16px;font-weight:500;cursor:pointer;transition:border-color .3s,scale .2s var(--ease)}
 .menu-btn:active{scale:.96}
@@ -283,7 +307,7 @@ p{margin:0;text-wrap:pretty}
 [data-theme="dark"] .note::before,[data-theme="dark"] .note::after{box-shadow:0 14px 12px rgba(0,0,0,.7)}
 
 /* ===== Contact / footer ===== */
-.contact{padding-bottom:28px}
+.contact{padding-bottom:28px;border-radius:0}
 .contact h2{font-size:clamp(40px,6.4vw,104px)}
 .contact-row{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:clamp(28px,3.6vw,48px)}
 .mail{font-size:clamp(20px,2.4vw,30px);letter-spacing:-.02em;color:var(--dark-text);padding-bottom:3px;background-size:100% 1px}
@@ -343,6 +367,13 @@ dialog.modal::backdrop{background:rgba(10,10,12,.62);backdrop-filter:blur(8px);-
 .m-gallery figure.wide{grid-column:1/-1}
 .m-gallery .box{border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--line);background:#fff}
 .m-gallery img,.m-gallery video{width:100%;height:auto}
+.m-gallery iframe{display:block;width:100%;aspect-ratio:16/9;border:0;background:#000}
+.yt{position:relative;display:block;width:100%;aspect-ratio:16/9;padding:0;border:0;background:#000;cursor:pointer;overflow:hidden}
+.yt img{width:100%;height:100%;object-fit:cover;opacity:.85;transition:transform .8s var(--ease),opacity .4s}
+.yt-play{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;display:grid;place-items:center;background:var(--cream);color:#141414;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .45s var(--spring)}
+.yt-play svg{width:30px;height:30px;margin-left:4px}
+@media (hover:hover){.yt:hover img{transform:scale(1.03);opacity:1}.yt:hover .yt-play{transform:scale(1.1)}}
+.yt:focus-visible .yt-play{outline:3px solid var(--focus);outline-offset:4px}
 .m-gallery svg{display:block;width:100%;height:auto;background:#fff;padding:16px}
 .m-gallery figcaption{font-size:14px;color:var(--muted);margin-top:8px}
 .m-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:clamp(40px,5vw,64px);padding-top:24px;border-top:1px solid var(--line)}
@@ -500,9 +531,9 @@ dialog.modal::backdrop{background:rgba(10,10,12,.62);backdrop-filter:blur(8px);-
   <div class="wrap">
     <div class="shead"><h2 id="h-skills" class="rv">What I'm good at</h2><p class="rv" style="--d:120ms">I like being part of the whole thing: talking to people, sketching the flow, building it, then testing it with the people who'll use it.</p></div>
     <ul class="notes">
-      <li class="note rv" style="--c:var(--brick);--d:0ms"><div class="paper"><h3>Accessibility</h3><ul><li>WCAG 2.2 audits</li><li>Screen reader testing with VoiceOver, NVDA and TalkBack</li><li>Keyboard testing and ARIA</li><li>Accessible design systems</li><li>CPACC</li></ul></div></li>
-      <li class="note rv" style="--c:var(--cobalt);--d:110ms"><div class="paper"><h3>Engineering</h3><ul><li>React, Next.js and TypeScript</li><li>Node.js and PostgreSQL</li><li>Python</li><li>LLM agents</li><li>Arduino and physical computing</li></ul></div></li>
-      <li class="note rv" style="--c:var(--green);--d:220ms"><div class="paper"><h3>Research</h3><ul><li>User research and interviews</li><li>Co-design</li><li>Usability testing</li><li>Study design</li></ul></div></li>
+      <li class="note rv" style="--c:var(--brick);--d:0ms"><div class="paper"><h3>Accessibility</h3><ul><li>Accessibility audits to WCAG 2.2 AA</li><li>Screen reader testing with VoiceOver, NVDA and TalkBack</li><li>Keyboard testing and ARIA</li><li>Accessible design systems</li><li>CPACC (IAAP), results pending</li></ul></div></li>
+      <li class="note rv" style="--c:var(--cobalt);--d:110ms"><div class="paper"><h3>Engineering</h3><ul><li>Full-stack web apps with React, Next.js and TypeScript</li><li>Node.js and PostgreSQL</li><li>Python</li><li>Swift and iOS</li><li>LLM agents and conversational interfaces</li><li>Arduino and physical computing</li></ul></div></li>
+      <li class="note rv" style="--c:var(--green);--d:220ms"><div class="paper"><h3>Research</h3><ul><li>User research and interviews</li><li>Co-design</li><li>Usability testing</li><li>Study design</li><li>Qualitative and quantitative analysis</li><li>HCI and human–robot interaction</li></ul></div></li>
       <li class="note rv" style="--c:var(--gold);--t:#1A1A1A;--d:330ms"><div class="paper"><h3>Design</h3><ul><li>Designing complex, user-centred systems</li><li>Interaction design and user flows</li><li>Wireframes and prototypes in Figma</li><li>Bilingual Arabic and English layouts</li><li>Physical prototyping with 3D printing and laser cutting</li><li>Creative coding</li></ul></div></li>
     </ul>
   </div>
@@ -664,20 +695,21 @@ play:[
   text:[['p','The piece asks what consent means for machines built to serve, and what changes when a helper can say no.']],
   gallery:[{src:'assets/consent.webp',alt:'A black servo-driven robotic hand on a coiled column, draped with wooden beads.',cap:'The installation',wide:1}],
   links:[['View on Ars Electronica','https://ars.electronica.art/panic/en/view/consent-not-guaranteed-21738ddb450c81f0a4e5c0bab727c5f1/']]},
- {id:'twister',file:"Twisted Twister.mp4",title:'Twisted Twister!',sub:'Finger physiotherapy game',desc:'Twister made small and played with your fingers, as a physiotherapy exercise.',
+ {id:'crysterrical',file:"Crysterrical.jpg",title:'Cryst[ERR]ical',sub:'Desert Media Art, NYU Abu Dhabi',desc:'An interactive light and sound installation in the desert that reacts to how calmly you move.',
+  thumb:{img:'assets/crysterrical.webp'},kicker:'Tinkered · Installation',
+  lead:'Cryst[ERR]ical is an interactive installation inspired by two kinds of desert rose: the crystal, linked to grounding and healing, and the poisonous flower known for its hallucinogenic effects. It turns that contrast into a space that changes with you.',
+  facts:[['Course','Desert Media Art, NYU Abu Dhabi'],['Team','Elora Trotter, Keya Shah, Marcos Hernandez, Mirette Dahab'],['Shown','In the desert near Abu Dhabi, and at the NYUAD Interactive Media Showcase, 9 December 2025']],
+  text:[['p','Three connected forms stand together. Move through the space calmly and they hold you gently, glowing softly like the restorative crystal.'],['p','Move too much and the balance breaks. Lights glitch, sounds distort, and all three forms react together, surrounding you in an unstable field that shows the flower\'s toxic side.']],
+  gallery:[{yt:'_-8nd27P6cw',title:'Cryst[ERR]ical: A Desert Installation',cap:'The film: Cryst[ERR]ical, a desert installation',wide:1},{src:'assets/cry-01.jpg',alt:'At night, the three towers glow pink and orange while a visitor stands between them.',cap:'In the desert at night',wide:1},{src:'assets/cry-02.jpg',alt:'Three white towers of stacked arches on the dunes at sunset.',cap:'Field installation · Photo: Michael Ang',wide:1},{src:'assets/cry-03.jpg',alt:'A visitor reaches into the towers at dusk as the arches glow softly pink.',cap:'Field installation · Photo: Michael Ang'},{src:'assets/cry-04.jpg',alt:'Under pink light, a visitor holds his head between the towers as the installation reacts.',cap:'Field installation · Photo: Michael Ang'},{src:'assets/cry-05.jpg',alt:'At the showcase, three towers glow warm yellow in front of a screen showing the desert.',cap:'IM Showcase, 9 Dec 2025 · Photo: Elora Trotter',wide:1},{src:'assets/cry-06.jpg',alt:'A visitor smiles as she touches one of the glowing towers while others watch.',cap:'IM Showcase, 9 Dec 2025 · Photo: Elora Trotter'},{src:'assets/cry-07.jpg',alt:'Close-up of the towers lit white and pink as a visitor moves between them.',cap:'IM Showcase, 9 Dec 2025 · Photo: Elora Trotter'},{src:'assets/cry-08.jpg',alt:'A visitor reaches out to touch a single glowing tower in a dark room.',cap:'IM Showcase, 9 Dec 2025 · Photo: Elora Trotter'},{src:'assets/cry-09.jpg',alt:'Three towers lit pink, white and purple, with a visitor in silhouette.',cap:'IM Showcase, 9 Dec 2025 · Photo: Elora Trotter'},{src:'assets/cry-10.jpg',alt:'A visitor\'s hand reaches toward a tower bathed in deep pink light.',cap:'IM Showcase, 9 Dec 2025 · Photo: Elora Trotter',wide:1}],
+  links:[['Watch the film on YouTube','https://youtu.be/_-8nd27P6cw']]},
+  {id:'twister',file:"Twisted Twister.mp4",title:'Twisted Twister!',sub:'Finger physiotherapy game',desc:'Twister made small and played with your fingers, as a physiotherapy exercise.',
   thumb:{img:'assets/twister.webp'},tint:'#fff',kicker:'Tinkered · Physical computing',
   lead:'A finger-sized version of Twister designed to make physiotherapy exercises for the hand more fun. The game calls out which finger goes on which colour, and sensors check that you did it.',
   facts:[['Course','Introduction to Interactive Media, NYU Abu Dhabi, Fall 2023'],['Built with','Arduino, force and ultrasonic sensors, p5.js'],['Type','Solo game']],
   text:[['p','Force sensors sit under each coloured circle on an acrylic board. A p5.js screen spins the wheel, tracks the score and decides when you win or lose. Because your hand is busy on the board, you can spin hands-free.']],
   gallery:[{src:'assets/twister.webp',alt:'Twisted Twister title screen with coloured circles and a Play button.',cap:'Start screen',wide:1}],
   links:[['Watch the demo','https://www.youtube.com/watch?v=AEBiwOjcJpo']]},
- {id:'crysterrical',file:"Crysterrical.jpg",title:'Crysterrical',sub:'Desert Media Art, NYU Abu Dhabi',desc:'Light sculptures installed in the desert outside Abu Dhabi.',
-  thumb:{img:'assets/crysterrical.webp'},tint:'#F3E9E2',kicker:'Tinkered · Installation',
-  lead:'Three tall white sculptures made of stacked arches, lit from the inside and installed on the dunes at sunset.',
-  facts:[['Course','Desert Media Art, NYU Abu Dhabi'],['Site','Desert near Abu Dhabi']],
-  text:[],
-  gallery:[{src:'assets/crysterrical.webp',alt:'Three white towers of stacked arches standing on sand dunes at sunset.',cap:'Installed at sunset',wide:1}],
-  links:[['Project page','https://desert.nyuadim.com/crysterrical/']]},
+ 
  {id:'plantwise',file:"Plantwise.app",title:'Plantwise',sub:'Web app',desc:'A community site for finding and reviewing plant-based products.',
   thumb:{img:'assets/plantwise-logo.webp',contain:1},tint:'#1d4b0b',kicker:'Tinkered · Web app',
   lead:'A full-stack web app where people can browse plant-based and sustainable products, save favourites and post reviews.',
@@ -699,10 +731,15 @@ play:[
   links:[['Read on Medium','https://medium.com/@keya19shah_48385/i-loved-modern-tech-until-i-saw-its-limits-a3b92a269015']]}
 ]};
 
-const META={portal:['Web platform','assets/portal-attendance.webp'],k2e:['Website','assets/k2e-site-hero.webp'],igem:['Wiki','assets/igem-home.webp'],echo:['Product','assets/echo.webp'],moodcheck:['Web app','assets/moodcheck.png'],
+const CARD={
+hri:`<svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" style="padding:0;background:#002C78"><circle cx="286" cy="22" r="70" fill="#0A3A8E"/><circle cx="30" cy="170" r="50" fill="#0A3A8E"/><rect x="40" y="96" width="62" height="36" rx="13" fill="#FFFAF1" opacity=".18"/><rect x="52" y="108" width="38" height="4" rx="2" fill="#FFFAF1" opacity=".75"/><rect x="52" y="117" width="24" height="4" rx="2" fill="#FFFAF1" opacity=".75"/><line x1="150" y1="62" x2="150" y2="46" stroke="#FFFAF1" stroke-width="4" stroke-linecap="round"/><circle cx="150" cy="41" r="6" fill="#EACE00"/><rect x="101" y="84" width="10" height="22" rx="4" fill="#FFFAF1"/><rect x="189" y="84" width="10" height="22" rx="4" fill="#FFFAF1"/><rect x="108" y="62" width="84" height="66" rx="20" fill="#FFFAF1"/><circle cx="133" cy="92" r="7" fill="#002C78"/><circle cx="167" cy="92" r="7" fill="#002C78"/><path d="M137 109q13 10 26 0" fill="none" stroke="#002C78" stroke-width="4" stroke-linecap="round"/><rect x="120" y="132" width="60" height="40" rx="12" fill="#FFFAF1" opacity=".92"/><rect x="204" y="36" width="76" height="46" rx="15" fill="#EACE00"/><path d="M218 82l-9 14 22-14z" fill="#EACE00"/><path d="M242 72c-10-7-14-11-14-16a6.5 6.5 0 0 1 14-3 6.5 6.5 0 0 1 14 3c0 5-4 9-14 16z" fill="#A30000"/></svg>`,
+grow:`<svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" style="padding:0;background:#1E5500"><circle cx="300" cy="20" r="64" fill="#2A6810"/><rect x="0" y="150" width="320" height="30" fill="#174300"/><rect x="40" y="130" width="50" height="20" fill="#3B7F18"/><rect x="90" y="110" width="50" height="40" fill="#4A9022"/><rect x="140" y="90" width="50" height="60" fill="#5AA12C"/><line x1="172" y1="90" x2="172" y2="54" stroke="#FFFAF1" stroke-width="3.5" stroke-linecap="round"/><path d="M172 54l28 9-28 9z" fill="#EACE00"/><rect x="34" y="32" width="74" height="44" rx="15" fill="#FFFAF1"/><path d="M50 76l-8 13 21-13z" fill="#FFFAF1"/><path d="M57 54l9 9 17-17" fill="none" stroke="#1E5500" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M226 150l6-28h44l6 28z" fill="#A30000"/><line x1="254" y1="122" x2="254" y2="80" stroke="#AEE08F" stroke-width="4" stroke-linecap="round"/><path d="M254 104c-19-2-27-15-25-26 15 0 25 9 25 26z" fill="#AEE08F"/><path d="M254 92c17-2 25-13 23-24-14 0-23 9-23 24z" fill="#AEE08F"/></svg>`,
+nabd:`<svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" style="padding:0;background:#EACE00"><circle cx="20" cy="20" r="60" fill="#F2DB3A"/><rect x="30" y="50" width="100" height="80" rx="16" fill="#FFFAF1"/><text x="80" y="101" text-anchor="middle" font-size="32" fill="#1A1A1A" font-family="'Geeza Pro','Noto Naskh Arabic',Arial,sans-serif">يوسف</text><rect x="190" y="50" width="100" height="80" rx="16" fill="#002C78"/><g font-family="Geist,system-ui,sans-serif" font-size="15" fill="#FFFAF1" text-anchor="middle"><text x="240" y="80">Yusuf</text><text x="240" y="100">Youssef</text><text x="240" y="120">Yusef</text></g><path d="M136 72c16-22 34-22 48 0" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/><path d="M178 62l7 10-12 1z" fill="#1A1A1A"/><path d="M184 110c-14 22-34 22-48 0" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round" stroke-dasharray="5 6"/><circle cx="160" cy="146" r="14" fill="#A30000"/><text x="160" y="152" text-anchor="middle" font-size="17" font-weight="600" fill="#FFFAF1" font-family="Geist,system-ui,sans-serif">?</text></svg>`,
+stories:`<svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" style="padding:0;background:#A30000"><circle cx="300" cy="170" r="70" fill="#B3160F"/><path d="M160 146c-30-12-60-12-90-4V64c30-8 60-8 90 4z" fill="#FFFAF1"/><path d="M160 146c30-12 60-12 90-4V64c-30-8-60-8-90 4z" fill="#F3E4C4"/><line x1="160" y1="68" x2="160" y2="146" stroke="#C9B48C" stroke-width="2"/><g fill="#1A1A1A" opacity=".55"><rect x="86" y="78" width="56" height="4" rx="2"/><rect x="86" y="90" width="48" height="4" rx="2"/><rect x="86" y="102" width="54" height="4" rx="2"/><rect x="86" y="114" width="40" height="4" rx="2"/></g><circle cx="205" cy="88" r="10" fill="#EACE00"/><rect x="195" y="100" width="20" height="26" rx="9" fill="#002C78"/><path d="M226 92c6-8 16-8 18 0" fill="none" stroke="#1E5500" stroke-width="3" stroke-linecap="round"/><path d="M60 30l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#EACE00"/><path d="M268 34l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#FFFAF1"/></svg>`};
+const META={portal:['Web platform','assets/portal-landing.webp'],k2e:['Website','assets/k2e-site-hero.webp'],igem:['Wiki','assets/igem-home.webp'],echo:['Product','assets/echo.webp'],moodcheck:['Web app','assets/moodcheck.png'],
   hri:["Paper · HRI '26",'assets/hri-fig1.webp',1],grow:['Paper','assets/grow-fig1.webp',1],nabd:['Research',null],stories:['Research',null],
   consent:['Installation','assets/consent.webp'],twister:['Game','assets/twister.webp'],crysterrical:['Installation','assets/crysterrical.webp'],plantwise:['Web app','assets/plantwise-logo.webp'],journo:['iOS app','assets/journo.png',0,'40% 50%'],blog:['Blog',null]};
-const SHORT={blog:'I loved modern tech until I saw its limits',hri:'Designing robot wellbeing coaches',grow:'GROW: an AI wellbeing coach',nabd:'What gets lost between scripts',stories:'Personalised social stories',portal:'Key2Enable Learning Portal',igem:'iGEM 2025 wiki: Revitalyze'};
+const SHORT={crysterrical:'Cryst[ERR]ical',blog:'I loved modern tech until I saw its limits',hri:'Designing robot wellbeing coaches',grow:'GROW: an AI wellbeing coach',nabd:'What gets lost between scripts',stories:'Personalised social stories',portal:'Key2Enable Learning Portal',igem:'iGEM 2025 wiki: Revitalyze'};
 
 (function(){
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -722,9 +759,9 @@ const SHORT={blog:'I loved modern tech until I saw its limits',hri:'Designing ro
   // ---- grid
   ['work','research','play'].forEach(c=>{const g=document.querySelector(`[data-g="${c}"]`);const cols=c==='play'?4:2;
     g.innerHTML=P[c].map((p,i)=>{const id=p.id,m=META[id];
-      const media=m[1]?`<img src="${m[1]}" alt="" loading="lazy" decoding="async"${m[3]?` style="object-position:${m[3]}"`:''}>`:SVG[p.svg].replace(/role="img" aria-label="[^"]*"/,'aria-hidden="true"').replace(/id="(ah2?)"/g,'id="$1g"').replace(/url\(#(ah2?)\)/g,'url(#$1g)');
+      const media=CARD[id]?CARD[id]:m[1]?`<img src="${m[1]}" alt="" loading="lazy" decoding="async"${m[3]?` style="object-position:${m[3]}"`:''}>`:SVG[p.svg].replace(/role="img" aria-label="[^"]*"/,'aria-hidden="true"').replace(/id="(ah2?)"/g,'id="$1g"').replace(/url\(#(ah2?)\)/g,'url(#$1g)');
       const sub=c==='research'?(p.facts.find(f=>f[0]==='Authors')||['',p.venue||''])[1]:(p.desc||'');
-      return `<li class="tile rv" style="--d:${(i%cols)*90}ms"><button type="button" data-open="${id}"><div class="img ${m[2]||c==='research'?'contain':''}">${media}<span class="go" aria-hidden="true">${arrow}</span></div><div class="cap"><span class="kind">${esc(m[0])}</span><b>${esc(SHORT[id]||p.title)}</b><span class="sub">${esc(sub)}</span>${p.badge?`<span class="chip">${esc(p.badge)}</span>`:''}</div></button></li>`}).join('')});
+      return `<li class="tile rv" style="--d:${(i%cols)*90}ms"><button type="button" data-open="${id}"><div class="img ${CARD[id]?'':(m[2]||c==='research'?'contain':'')}">${media}<span class="go" aria-hidden="true">${arrow}</span></div><div class="cap"><span class="kind">${esc(m[0])}</span><b>${esc(SHORT[id]||p.title)}</b><span class="sub">${esc(sub)}</span>${p.badge?`<span class="chip">${esc(p.badge)}</span>`:''}</div></button></li>`}).join('')});
   document.querySelectorAll('.tile .img img').forEach(img=>{const on=()=>img.classList.add('ld');if(img.complete&&img.naturalWidth)on();else{img.addEventListener('load',on,{once:true});img.addEventListener('error',on,{once:true})}});
 
   // ---- carousels: native scroll + snap, with buttons and a counter
@@ -767,7 +804,7 @@ const SHORT={blog:'I loved modern tech until I saw its limits',hri:'Designing ro
     let h=`<h2 id="m-title" tabindex="-1">${esc(p.title)}</h2><p class="m-lead">${esc(p.lead)}</p><dl class="m-facts">${p.facts.map(f=>`<div><dt>${esc(f[0])}</dt><dd>${esc(f[1])}</dd></div>`).join('')}</dl>`;
     if(p.text&&p.text.length)h+=`<div class="m-text">${p.text.map(t=>t[0]==='h'?`<h3>${esc(t[1])}</h3>`:`<p>${esc(t[1])}</p>`).join('')}</div>`;
     if(p.links&&p.links.length)h+=`<div class="m-links">${p.links.map((l,i)=>`<a class="btn ${i?'ghost':''}" href="${l[1]}" target="_blank" rel="noopener">${esc(l[0])} <span class="arr" aria-hidden="true">↗</span><span class="sr-only"> (opens in new tab)</span></a>`).join('')}</div>`;
-    if(p.gallery&&p.gallery.length)h+=`<div class="m-gallery">${p.gallery.map(g=>`<figure class="${g.wide?'wide':''}"><div class="box">${g.svg?SVG[g.svg]:g.video?`<video src="${g.video}" poster="${g.poster}" controls muted playsinline preload="metadata" aria-label="${esc(g.alt)}"></video>`:`<img src="${g.src}" alt="${esc(g.alt)}" loading="lazy" decoding="async">`}</div><figcaption>${esc(g.cap)}</figcaption></figure>`).join('')}</div>`;
+    if(p.gallery&&p.gallery.length)h+=`<div class="m-gallery">${p.gallery.map(g=>`<figure class="${g.wide?'wide':''}"><div class="box">${g.yt?`<button type="button" class="yt" data-yt="${g.yt}" data-title="${esc(g.title||g.cap)}" aria-label="Play video: ${esc(g.title||g.cap)}"><img src="https://i.ytimg.com/vi/${g.yt}/hqdefault.jpg" alt="" loading="lazy"><span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>`:g.svg?SVG[g.svg]:g.video?`<video src="${g.video}" poster="${g.poster}" controls muted playsinline preload="metadata" aria-label="${esc(g.alt)}"></video>`:`<img src="${g.src}" alt="${esc(g.alt)}" loading="lazy" decoding="async">`}</div><figcaption>${esc(g.cap)}</figcaption></figure>`).join('')}</div>`;
     const k=order.indexOf(id),prev=order[(k-1+order.length)%order.length],next=order[(k+1)%order.length];
     h+=`<nav class="m-nav" aria-label="More projects"><button type="button" data-goto="${prev}"><small><span class="a" aria-hidden="true">←</span> Previous</small><b>${esc(label(prev))}</b></button><button type="button" data-goto="${next}"><small>Next <span class="a" aria-hidden="true">→</span></small><b>${esc(label(next))}</b></button></nav>`;
     mb.innerHTML=h;
@@ -783,11 +820,16 @@ const SHORT={blog:'I loved modern tech until I saw its limits',hri:'Designing ro
   function goTo(id){mb.querySelectorAll('video').forEach(v=>v.pause());
     if(reduce){render(id);mb.querySelector('h2').focus();return}
     mb.classList.add('out');setTimeout(()=>{render(id);mb.classList.remove('out');mb.querySelector('h2').focus({preventScroll:true})},220)}
-  document.addEventListener('click',e=>{const b=e.target.closest('[data-open]');if(b)openModal(b.dataset.open);const g=e.target.closest('[data-goto]');if(g)goTo(g.dataset.goto)});
+  document.addEventListener('click',e=>{const y=e.target.closest('.yt');if(y){const id=y.dataset.yt;
+      if(!/^https?:$/.test(location.protocol)){window.open('https://www.youtube.com/watch?v='+id,'_blank','noopener');return}
+      const f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0';f.title=y.dataset.title;
+      f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';f.referrerPolicy='strict-origin-when-cross-origin';f.allowFullscreen=true;
+      y.replaceWith(f);f.focus();return}
+    const b=e.target.closest('[data-open]');if(b)openModal(b.dataset.open);const g=e.target.closest('[data-goto]');if(g)goTo(g.dataset.goto)});
   document.getElementById('m-close').onclick=closeModal;
   modal.addEventListener('cancel',e=>{e.preventDefault();closeModal()});
   modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
-  modal.addEventListener('close',()=>{root.classList.remove('locked');mb.querySelectorAll('video').forEach(v=>v.pause())});
+  modal.addEventListener('close',()=>{root.classList.remove('locked');mb.querySelectorAll('video').forEach(v=>v.pause());mb.querySelectorAll('iframe').forEach(f=>f.remove())});
 
   // ---- theme toggle (remembers choice, circular reveal where supported)
   const tb=document.getElementById('theme');
@@ -875,8 +917,3 @@ const SHORT={blog:'I loved modern tech until I saw its limits',hri:'Designing ro
 </script>
 </body>
 </html>
-
-
-
-
-
